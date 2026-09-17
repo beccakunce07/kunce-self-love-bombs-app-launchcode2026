@@ -5,10 +5,8 @@ import com.launchcode2026.kunce_self_love_bombs.models.User;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("find-all")
-    public List<User> getAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 
@@ -41,6 +39,11 @@ public class UserController {
         return userRepository.findById(id);
 
     }
-}
+
+    @GetMapping("find-by-email")
+    public ResponseEntity<User> getUserByEmail (@RequestParam String email){
+        return ResponseEntity.of(userRepository.findByEmail(email));
+    }
+    }
 
 

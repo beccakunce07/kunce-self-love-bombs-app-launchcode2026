@@ -19,10 +19,8 @@ public class User {
     private String location;
     private LocalDate birthday;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<User> users = new ArrayList<>();
-
-    public User(){}
+    @OneToOne(mappedBy = "users")
+    private List<User> userList = new ArrayList<>();
 
     public User(Long id, String firstName, String lastName, String username, String email, String location, LocalDate birthday){
         this.id = id;

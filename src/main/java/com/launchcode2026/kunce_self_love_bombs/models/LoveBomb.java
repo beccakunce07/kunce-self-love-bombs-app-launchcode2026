@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -16,5 +18,10 @@ public class LoveBomb {
     private String message;
     private String category;
     private LocalDate timeSubmitted;
+
+    @ManyToMany(mappedBy = "love-bombs")
+    private List<LoveBomb> loveBombList = new ArrayList<>();
+
+    public LoveBomb(){}
 
 }
