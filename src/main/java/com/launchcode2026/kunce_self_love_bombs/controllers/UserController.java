@@ -28,9 +28,8 @@ public class UserController {
 
     @GetMapping("home")
     public String home() {
-        return "<b>Hello World</b>";
+        return "Hello World";
     }
-
 
     @GetMapping("find-all")
     public List<User> getAll() {

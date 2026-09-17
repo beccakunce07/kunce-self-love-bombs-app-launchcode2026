@@ -1,10 +1,10 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,6 +18,11 @@ public class User {
     private String email;
     private String location;
     private LocalDate birthday;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<User> users = new ArrayList<>();
+
+    public User(){}
 
     public User(Long id, String firstName, String lastName, String username, String email, String location, LocalDate birthday){
         this.id = id;

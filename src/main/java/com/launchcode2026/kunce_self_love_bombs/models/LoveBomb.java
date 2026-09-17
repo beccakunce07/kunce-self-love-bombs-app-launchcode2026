@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "self_love_bombs")
+@Table
 @Data
 public class LoveBomb {
     @Id
