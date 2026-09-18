@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -15,6 +16,6 @@ public class LoveBomb {
 
     private String message;
     private String category;
-    private LocalDate timeSubmitted;
+    private LocalDateTime timeSubmitted;
 
 }
