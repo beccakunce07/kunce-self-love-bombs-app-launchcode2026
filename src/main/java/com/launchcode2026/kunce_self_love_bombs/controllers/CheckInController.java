@@ -23,10 +23,12 @@ public class CheckInController {
     @Autowired
     private CheckInRepository checkInRepository;
 
-    @GetMapping("testing")
-        public String test() {
-            return "I am here";
-        }
+//    @GetMapping("testing")
+//        public String test() {
+//            return "I am here";
+//        }
+
+
 
     }
 

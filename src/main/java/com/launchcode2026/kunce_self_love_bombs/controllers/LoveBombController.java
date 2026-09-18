@@ -7,11 +7,10 @@ import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.service.annotation.GetExchange;
+//add this back in if there is time with birthday and time submitted
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,21 +28,32 @@ public class LoveBombController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private CheckInRepository checkInRepository;
-
-    @GetExchange("find-all")
-    public List<LoveBomb> getAll() {
+    @GetMapping("find-all")
+    public List<LoveBomb> findAll() {
         return loveBombRepository.findAll();
     }
 
-//    @GetMapping("testAddBomb")
-//    public LoveBomb testBomb(){
-//        LocalDateTime currentDateTime = LocalDateTime.now();
-//        LoveBomb test = new LoveBomb("this is a test and you're doing great", "test category", currentDateTime)
-//    }
+    @GetMapping("find-by-category")
+    public ResponseEntity<List<LoveBomb>> getLoveBombsByCategory(@RequestParam String category) {
+        List<LoveBomb> loveBombs = loveBombRepository.findByCategoryIgnoreCase(category);
 
-    //this will use the CYO form on the front end.
+        if (loveBombs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(loveBombs);
+    }
+
+    @GetMapping("find-by-keyword")
+    public ResponseEntity<List<LoveBomb>> getLoveBombsByKeyword(@RequestParam String keyword) {
+        List<LoveBomb> loveBombs = loveBombRepository.findByMessageContainingIgnoreCase(keyword);
+        if (loveBombs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(loveBombs);
+    }
+
+    //this will (hopefully) use the CYO form on the front endd
+
     @PostMapping("CYO-form")
     public String handleForm(LoveBomb loveBomb){
         System.out.println(loveBomb.getMessage());
