@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LoveBombRepository extends JpaRepository<LoveBomb, Long> {
+public interface LoveBombRepository extends JpaRepository<LoveBomb, Integer> {
 
     List<LoveBomb> findByCategoryIgnoreCase (String category);
     List<LoveBomb> findByMessageContainingIgnoreCase(String keyword);
