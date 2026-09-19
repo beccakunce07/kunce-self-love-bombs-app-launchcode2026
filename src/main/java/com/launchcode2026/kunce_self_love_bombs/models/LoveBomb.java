@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table
-@Data
 public class LoveBomb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

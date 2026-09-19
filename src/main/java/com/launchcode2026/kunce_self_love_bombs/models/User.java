@@ -20,6 +20,7 @@ public class User {
     private String email;
     private LocalDate birthday;
 
+
     @OneToMany (cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<LoveBomb> loveBombs = new ArrayList<>();
@@ -28,6 +29,8 @@ public class User {
     @JoinColumn(name = "user_id")
     private List<CheckIn> checkIns = new ArrayList<>();
 
+    User(){}
+
     public User(String firstName, String lastName, String username, String email, LocalDate birthday){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,4 +38,6 @@ public class User {
         this.email = email;
         this.birthday = birthday;
     }
+
+
 }

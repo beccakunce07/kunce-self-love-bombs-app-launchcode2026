@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
-public class CheckIn {
+public class CheckInDTO {
 
     @Id
     private String key;
@@ -36,6 +36,4 @@ public class CheckIn {
     public void setRecordedAt(LocalDate recordedAt) {
         this.recordedAt = recordedAt;
     }
-
-
 }

@@ -6,6 +6,7 @@ import com.launchcode2026.kunce_self_love_bombs.models.CheckIn;
 import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
+import jakarta.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,9 @@ public class LoveBombController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @OneToMany
+
 
     @GetMapping("find-all")
     public List<LoveBomb> findAll() {
