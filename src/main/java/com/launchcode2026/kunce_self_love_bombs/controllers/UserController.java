@@ -49,7 +49,7 @@ public class UserController {
 
     //this one i dont even know how to search it - i'm searching by just the data so like becca or 3 for id or first name?
     @GetMapping("/{id}")
-    public Optional<User> findById(@PathVariable Long id) {
+    public Optional<User> findById(@PathVariable int id) {
         return userRepository.findById(id);
     }
 

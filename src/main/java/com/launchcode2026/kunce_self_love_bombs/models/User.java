@@ -20,29 +20,32 @@ public class User {
     private LocalDate birthday;
 
 
-    @OneToMany (cascade = CascadeType.ALL)
-    private LoveBomb loveBomb;
-
-    @OneToMany (cascade = CascadeType.ALL)
-    private CheckIn checkIn;
-
-    @ManyToMany
-
+    @OneToMany(cascade = CascadeType.ALL)
+    //i feel like is this many to many? one user may have many love bombs mbut many love bombs can have many users?
     @JoinColumn(name = "user_id")
+    private List<LoveBomb> loveBombs = new ArrayList<>();
 
-
-    @OneToMany (cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<CheckIn> checkIns = new ArrayList<>();
 
-    User(){}
+    User() {
+    }
 
-    public User(String firstName, String lastName, String username, String email, LocalDate birthday){
+    public User(String firstName, String lastName, String username, String email, LocalDate birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.birthday = birthday;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -85,6 +88,19 @@ public class User {
         this.birthday = birthday;
     }
 
+    public List<LoveBomb> getLoveBombs() {
+        return loveBombs;
+    }
 
+    public void setLoveBombs(List<LoveBomb> loveBombs) {
+        this.loveBombs = loveBombs;
+    }
 
+    public List<CheckIn> getCheckIns() {
+        return checkIns;
+    }
+
+    public void setCheckIns(List<CheckIn> checkIns) {
+        this.checkIns = checkIns;
+    }
 }
