@@ -40,10 +40,6 @@ public class CheckInController {
 //        }
 
 
-
-    }
-
-
 //    @GetMapping("find-all")
 //    public List<CheckIn> getAll(){
 //        return checkInRepository.findAll();
