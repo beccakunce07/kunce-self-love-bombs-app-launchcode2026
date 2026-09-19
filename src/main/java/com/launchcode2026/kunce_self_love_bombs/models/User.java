@@ -23,6 +23,9 @@ public class User {
     @OneToMany (cascade = CascadeType.ALL)
     private LoveBomb loveBomb;
 
+    @OneToMany (cascade = CascadeType.ALL)
+    private CheckIn checkIn;
+
     @ManyToMany
 
     @JoinColumn(name = "user_id")
@@ -41,6 +44,47 @@ public class User {
         this.email = email;
         this.birthday = birthday;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
 import jakarta.persistence.Entity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -11,6 +12,8 @@ public class UserDTO {
     private String lastName;
     private String username;
     private String email;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
 
