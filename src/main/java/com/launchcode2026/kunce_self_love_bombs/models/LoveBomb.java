@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 @Table
 public class LoveBomb {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private int id;==
 
     private String message;
     private String category;
