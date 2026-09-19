@@ -2,7 +2,6 @@ package com.launchcode2026.kunce_self_love_bombs.models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
