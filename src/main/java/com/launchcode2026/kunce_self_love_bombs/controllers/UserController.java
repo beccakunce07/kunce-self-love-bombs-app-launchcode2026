@@ -34,7 +34,7 @@ public class UserController {
         return "Hello World";
     }
 
-    @GetMapping("test-user") //this is connected and running - there is validation code in the front end - these need to be checked once the front end is connected.
+    @PostMapping ("/test-user") //this is connected and running - there is validation code in the front end - these need to be checked once the front end is connected.
     public User testUser(){
         User test = new User ("Becca", "Kunce", "beccakunce03", "kunceie33@gmail.com", LocalDate.of(1989, 3, 3));
         userRepository.save(test);
@@ -42,18 +42,18 @@ public class UserController {
     }
 
     //this one is getting a 500 error
-    @GetMapping("find-all")
+    @GetMapping("/find-all")
     public List<User> findAll() {
         return userRepository.findAll();
     } //500 internal server error
 
     //this one i dont even know how to search it - i'm searching by just the data so like becca or 3 for id or first name?
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Optional<User> findById(@PathVariable Long id) {
         return userRepository.findById(id);
     }
 
-    @GetMapping("{firstName}")
+    @GetMapping("/{firstName}")
     public Optional<User> findByFirstName(@PathVariable String firstName) {
         return userRepository.findByFirstNameIgnoreCase(firstName);
     }
