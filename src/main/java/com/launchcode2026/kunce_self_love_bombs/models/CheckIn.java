@@ -37,5 +37,4 @@ public class CheckIn {
         this.recordedAt = recordedAt;
     }
 
-
 }

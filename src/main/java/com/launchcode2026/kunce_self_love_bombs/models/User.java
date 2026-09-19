@@ -1,6 +1,5 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 import jakarta.persistence.*;
-import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -10,20 +9,24 @@ import java.util.List;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @GeneratedValue
     private Long id;
 
     private String firstName;
     private String lastName;
     private String username;
     private String email;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
 
     @OneToMany (cascade = CascadeType.ALL)
+    private LoveBomb loveBomb;
+
+    @ManyToMany
+
     @JoinColumn(name = "user_id")
-    private List<LoveBomb> loveBombs = new ArrayList<>();
+
 
     @OneToMany (cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
