@@ -3,9 +3,18 @@ package com.launchcode2026.kunce_self_love_bombs.models;
 import java.time.LocalDateTime;
 
 public class LoveBombDTO {
+    private int loveBombId;
     private String message;
     private String category;
     private LocalDateTime timeSubmitted;
+
+    public int getLoveBombId() {
+        return loveBombId;
+    }
+
+    public void setLoveBombId(int loveBombId) {
+        this.loveBombId = loveBombId;
+    }
 
     public String getMessage() {
         return message;

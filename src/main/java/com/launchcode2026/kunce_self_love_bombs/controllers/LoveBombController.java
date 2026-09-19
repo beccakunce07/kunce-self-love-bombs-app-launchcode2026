@@ -29,6 +29,9 @@ public class LoveBombController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CheckInRepository checkInRepository;
+
     @OneToMany
 
 
@@ -57,12 +60,12 @@ public class LoveBombController {
     }
 
     //this will (hopefully) use the CYO form on the front endd
-
-    @PostMapping("CYO-form")
-    public String handleForm(LoveBomb loveBomb){
-        System.out.println(loveBomb.getMessage());
-        loveBombRepository.save(loveBomb);
-        System.out.println(loveBomb);
-        return "Hello, here is your Love Bomb: " + loveBomb.getMessage() + " regarding " + loveBomb.getCategory() + ". This was submitted at " + loveBomb.getTimeSubmitted();
-    }
+//
+//    @PostMapping("CYO-form")
+//    public String handleForm(LoveBomb loveBomb){
+//        System.out.println(loveBomb.getMessage());
+//        loveBombRepository.save(loveBomb);
+//        System.out.println(loveBomb);
+//        return "Hello, here is your Love Bomb: " + loveBomb.getMessage() + " regarding " + loveBomb.getCategory() + ". This was submitted at " + loveBomb.getTimeSubmitted();
+//    }
 }
