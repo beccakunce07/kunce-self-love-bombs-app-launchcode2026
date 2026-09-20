@@ -54,8 +54,8 @@ public class LoveBombController {
 
     //400 error
     @GetMapping("find-by-keyword")
-    public ResponseEntity<List<LoveBomb>> getLoveBombsByKeyword(@RequestParam String keyword) {
-        List<LoveBomb> loveBombs = loveBombRepository.findByMessageContainingIgnoreCase(keyword);
+    public ResponseEntity<List<LoveBomb>> findByMessageKeyword(@RequestParam String keyword) {
+        List<LoveBomb> loveBombs = loveBombRepository.findByMessageKeyword(keyword);
         if (loveBombs.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
