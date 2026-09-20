@@ -9,18 +9,19 @@ import java.time.LocalDateTime;
 public class LoveBomb {
     @Id
     @GeneratedValue
-    private int id;
+    private int loveBombId;
 
     private String message;
     private String category;
     private LocalDateTime timeSubmitted;
 
-    public int getId() {
-        return id;
+
+    public int getLoveBombId() {
+        return loveBombId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLoveBombId(int loveBombId) {
+        this.loveBombId = loveBombId;
     }
 
     public String getMessage() {
