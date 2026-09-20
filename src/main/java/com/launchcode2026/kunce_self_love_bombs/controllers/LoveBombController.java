@@ -42,15 +42,15 @@ public class LoveBombController {
     }
 
     //this one gets a 404 error
-    @GetMapping("find-by-category")
-    public ResponseEntity<List<LoveBomb>> getLoveBombsByCategory(@RequestParam String category) {
-        List<LoveBomb> loveBombs = loveBombRepository.findByCategoryIgnoreCase(category);
-
-        if (loveBombs.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(loveBombs);
-    }
+//    @GetMapping("find-by-category")
+//    public ResponseEntity<List<LoveBomb>> getLoveBombsByCategory(@RequestParam String category) {
+//        List<LoveBomb> loveBombs = loveBombRepository.findByCategoryIgnoreCase(category);
+//
+//        if (loveBombs.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        }
+//        return ResponseEntity.ok(loveBombs);
+//    }
 
     //400 error
     @GetMapping("find-by-keyword")
