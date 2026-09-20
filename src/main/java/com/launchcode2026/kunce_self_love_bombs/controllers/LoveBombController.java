@@ -35,11 +35,13 @@ public class LoveBombController {
     @OneToMany
 
 
+    //this one is working yay
     @GetMapping("find-all")
     public List<LoveBomb> findAll() {
         return loveBombRepository.findAll();
     }
 
+    //this one gets a 404 error
     @GetMapping("find-by-category")
     public ResponseEntity<List<LoveBomb>> getLoveBombsByCategory(@RequestParam String category) {
         List<LoveBomb> loveBombs = loveBombRepository.findByCategoryIgnoreCase(category);
@@ -50,6 +52,7 @@ public class LoveBombController {
         return ResponseEntity.ok(loveBombs);
     }
 
+    //400 error
     @GetMapping("find-by-keyword")
     public ResponseEntity<List<LoveBomb>> getLoveBombsByKeyword(@RequestParam String keyword) {
         List<LoveBomb> loveBombs = loveBombRepository.findByMessageContainingIgnoreCase(keyword);
@@ -60,12 +63,12 @@ public class LoveBombController {
     }
 
     //this will (hopefully) use the CYO form on the front endd
-//
-//    @PostMapping("CYO-form")
-//    public String handleForm(LoveBomb loveBomb){
-//        System.out.println(loveBomb.getMessage());
-//        loveBombRepository.save(loveBomb);
-//        System.out.println(loveBomb);
-//        return "Hello, here is your Love Bomb: " + loveBomb.getMessage() + " regarding " + loveBomb.getCategory() + ". This was submitted at " + loveBomb.getTimeSubmitted();
-//    }
+
+    @PostMapping("CYO-form")
+    public String handleForm(LoveBomb loveBomb){
+        System.out.println(loveBomb.getMessage());
+        loveBombRepository.save(loveBomb);
+        System.out.println(loveBomb);
+        return "Hello, here is your Love Bomb: " + loveBomb.getMessage() + " regarding " + loveBomb.getCategory() + ". This was submitted at " + loveBomb.getTimeSubmitted();
+    }
 }

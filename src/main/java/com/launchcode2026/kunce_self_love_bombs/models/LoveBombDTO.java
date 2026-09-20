@@ -1,6 +1,7 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
 import java.time.LocalDateTime;
+import com.launchcode2026.kunce_self_love_bombs.models.LoveBomb;
 
 public class LoveBombDTO {
     private int loveBombId;

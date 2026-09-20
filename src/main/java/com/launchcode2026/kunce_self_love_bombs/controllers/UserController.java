@@ -25,7 +25,7 @@ public class UserController {
     private CheckInRepository checkInRepository;
 
     @GetMapping
-    public  String user(){
+    public String user(){
         return "Welcome to the user home page";
     }
 
@@ -34,12 +34,10 @@ public class UserController {
         return "Hello World";
     }
 
-    @PostMapping ("/test-user") //this is connected and running - there is validation code in the front end - these need to be checked once the front end is connected.
-    public User testUser(){
-        User test = new User ("Becca", "Kunce", "beccakunce03", "kunceie33@gmail.com", LocalDate.of(1989, 3, 3));
-        userRepository.save(test);
-        return test;
-    }
+    @GetMapping ("/test")
+    public Optional<User> findByUsernameIgnoreCase() {
+        return userRepository.findByUsernameIgnoreCase("beccakunce03");
+        }
 
     //this one is getting a 500 error
     @GetMapping("/find-all")

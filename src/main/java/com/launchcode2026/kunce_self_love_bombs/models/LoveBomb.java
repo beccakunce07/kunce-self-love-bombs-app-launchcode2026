@@ -15,4 +15,35 @@ public class LoveBomb {
     private String category;
     private LocalDateTime timeSubmitted;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public LocalDateTime getTimeSubmitted() {
+        return timeSubmitted;
+    }
+
+    public void setTimeSubmitted(LocalDateTime timeSubmitted) {
+        this.timeSubmitted = timeSubmitted;
+    }
 }
