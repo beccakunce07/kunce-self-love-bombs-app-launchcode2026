@@ -1,8 +1,6 @@
 package com.launchcode2026.kunce_self_love_bombs.controllers;
 
 import com.launchcode2026.kunce_self_love_bombs.models.LoveBomb;
-import com.launchcode2026.kunce_self_love_bombs.models.User;
-import com.launchcode2026.kunce_self_love_bombs.models.CheckIn;
 import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
@@ -10,14 +8,8 @@ import jakarta.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.service.annotation.GetExchange;
 //add this back in if there is time with birthday and time submitted
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("love-bomb")
@@ -54,8 +46,8 @@ public class LoveBombController {
 
     //400 error
     @GetMapping("find-by-keyword")
-    public ResponseEntity<List<LoveBomb>> findByMessageKeyword(@RequestParam String keyword) {
-        List<LoveBomb> loveBombs = loveBombRepository.findByMessageKeyword(keyword);
+    public ResponseEntity<List<LoveBomb>> findByMessageContaining (@RequestParam String keyword) {
+        List<LoveBomb> loveBombs = loveBombRepository.findByMessageContaining(keyword);
         if (loveBombs.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

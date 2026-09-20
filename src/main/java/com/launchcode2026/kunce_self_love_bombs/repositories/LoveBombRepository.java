@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface LoveBombRepository extends JpaRepository<LoveBomb, Integer>{
-    List<LoveBomb> findByMessageKeyword(String keyword);
+    List<LoveBomb> findByMessageContaining(String keyword);
 
 }

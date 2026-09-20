@@ -35,8 +35,8 @@ public class UserController {
     }
 
     @GetMapping ("/test")
-    public Optional<User> findByUsernameIgnoreCase() {
-        return userRepository.findByUsernameIgnoreCase("beccakunce03");
+    public Optional<User> findByUsername() {
+        return userRepository.findByUsername("beccakunce03");
         }
 
     //this one is getting a 500 error
@@ -53,12 +53,12 @@ public class UserController {
 
     @GetMapping("/{firstName}")
     public Optional<User> findByFirstName(@PathVariable String firstName) {
-        return userRepository.findByFirstNameIgnoreCase(firstName);
+        return userRepository.findByFirstName(firstName);
     }
 
     @GetMapping("{lastName}")
     public Optional<User> findByLastName(@PathVariable String lastName) {
-        return userRepository.findByLastNameIgnoreCase(lastName);
+        return userRepository.findByLastName (lastName);
     }
 
     @PostMapping("create-form")
