@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LoveBombRepository extends JpaRepository<LoveBomb, Integer>
+public interface LoveBombRepository extends JpaRepository<LoveBomb, Integer>{
+
+}
