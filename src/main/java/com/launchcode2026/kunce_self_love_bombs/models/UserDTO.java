@@ -1,6 +1,5 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
