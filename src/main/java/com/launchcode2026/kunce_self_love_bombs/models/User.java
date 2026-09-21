@@ -32,6 +32,8 @@ public class User {
 
 
 
+
+
     public User() {
     }
 
@@ -91,19 +93,4 @@ public class User {
         this.birthday = birthday;
     }
 
-    public List<LoveBomb> getLoveBombs() {
-        return loveBombs;
-    }
-
-    public void setLoveBombs(List<LoveBomb> loveBombs) {
-        this.loveBombs = loveBombs;
-    }
-
-    public List<CheckIn> getCheckIns() {
-        return checkIns;
-    }
-
-    public void setCheckIns(List<CheckIn> checkIns) {
-        this.checkIns = checkIns;
-    }
 }
