@@ -3,17 +3,27 @@ package com.launchcode2026.kunce_self_love_bombs.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table
+
 public class LoveBomb {
     @Id
     @GeneratedValue
     private int loveBombId;
 
     private String message;
-    private String category;
+    private String key;
     private LocalDateTime timeSubmitted;
+
+    @ManyToMany
+    @JoinTable(
+            name = "love_bomb_user", // The name of your third junction table
+            joinColumns = @JoinColumn(name = "love_bomb_id"), // Foreign key for this entity
+            inverseJoinColumns = @JoinColumn(name = "user_id") // Foreign key for the User entity
+    )
+    private List<User> users;
 
 
     public int getLoveBombId() {
@@ -32,12 +42,12 @@ public class LoveBomb {
         this.message = message;
     }
 
-    public String getCategory() {
-        return category;
+    public String getKey() {
+        return key;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public LocalDateTime getTimeSubmitted() {

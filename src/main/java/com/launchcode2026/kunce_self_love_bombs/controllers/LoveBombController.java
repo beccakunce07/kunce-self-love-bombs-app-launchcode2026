@@ -34,15 +34,15 @@ public class LoveBombController {
     }
 
     //this one gets a 404 error
-//    @GetMapping("find-by-category")
-//    public ResponseEntity<List<LoveBomb>> getLoveBombsByCategory(@RequestParam String category) {
-//        List<LoveBomb> loveBombs = loveBombRepository.findByCategoryIgnoreCase(category);
-//
-//        if (loveBombs.isEmpty()) {
-//            return ResponseEntity.noContent().build();
-//        }
-//        return ResponseEntity.ok(loveBombs);
-//    }
+    @GetMapping("find-by-key")
+    public ResponseEntity<List<LoveBomb>> getLoveBombsByKey(@RequestParam String key) {
+        List<LoveBomb> loveBombs = loveBombRepository.findByKeyContaining (key);
+
+        if (loveBombs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(loveBombs);
+    }
 
     //400 error
     @GetMapping("find-by-keyword")
@@ -61,6 +61,6 @@ public class LoveBombController {
         System.out.println(loveBomb.getMessage());
         loveBombRepository.save(loveBomb);
         System.out.println(loveBomb);
-        return "Hello, here is your Love Bomb: " + loveBomb.getMessage() + " regarding " + loveBomb.getCategory() + ". This was submitted at " + loveBomb.getTimeSubmitted();
+        return "Hello, here is your Love Bomb: " + loveBomb.getMessage() + " regarding " + loveBomb.getKey() + ". This was submitted at " + loveBomb.getTimeSubmitted();
     }
 }

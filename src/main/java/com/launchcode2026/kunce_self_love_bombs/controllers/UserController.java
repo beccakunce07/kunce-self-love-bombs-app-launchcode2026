@@ -39,29 +39,29 @@ public class UserController {
         return userRepository.findByUsername("beccakunce03");
         }
 
-    //this one is getting a 500 error
     @GetMapping("/find-all")
     public List<User> findAll() {
         return userRepository.findAll();
     } //500 internal server error
 
     //this one i dont even know how to search it - i'm searching by just the data so like becca or 3 for id or first name?
-    @GetMapping("/{id}")
-    public Optional<User> findById(@PathVariable int id) {
-        return userRepository.findById(id);
-    }
-
-    @GetMapping("/{firstName}")
-    public Optional<User> findByFirstName(@PathVariable String firstName) {
-        return userRepository.findByFirstName(firstName);
-    }
-
-    @GetMapping("{lastName}")
-    public Optional<User> findByLastName(@PathVariable String lastName) {
-        return userRepository.findByLastName (lastName);
-    }
+//    @GetMapping("/{id}")
+//    public Optional<User> findById(@PathVariable int id) {
+//        return userRepository.findById(id);
+//    }
+//
+//    @GetMapping("/{firstName}")
+//    public Optional<User> findByFirstName(@PathVariable String firstName) {
+//        return userRepository.findByFirstName(firstName);
+//    }
+//
+//    @GetMapping("{lastName}")
+//    public Optional<User> findByLastName(@PathVariable String lastName) {
+//        return userRepository.findByLastName (lastName);
+//    }
 
     @PostMapping("create-form")
+    @ResponseBody
     public String handleForm (User user) {
         System.out.println(user);
         userRepository.save(user);

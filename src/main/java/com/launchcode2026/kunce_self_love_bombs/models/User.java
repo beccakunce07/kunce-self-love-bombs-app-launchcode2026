@@ -22,11 +22,11 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL)
     //i feel like is this many to many? one user may have many love bombs mbut many love bombs can have many users?
-    @JoinColumn(name = "user_id")
+    @JoinTable
     private List<LoveBomb> loveBombs = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinTable
     private List<CheckIn> checkIns = new ArrayList<>();
 
     User() {

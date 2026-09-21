@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class LoveBombDTO {
     private int loveBombId;
     private String message;
-    private String category;
+    private String key;
     private LocalDateTime timeSubmitted;
 
     public int getLoveBombId() {
@@ -24,12 +24,12 @@ public class LoveBombDTO {
         this.message = message;
     }
 
-    public String getCategory() {
-        return category;
+    public String getKey() {
+        return key;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public LocalDateTime getTimeSubmitted() {
