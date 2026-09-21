@@ -9,9 +9,8 @@ import java.util.List;
 @Entity
 public class LoveBomb {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int loveBombId;
-
     private String message;
     private String key;
     private LocalDateTime timeSubmitted;

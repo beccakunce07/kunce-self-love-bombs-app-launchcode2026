@@ -1,9 +1,6 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -11,9 +8,19 @@ import java.time.LocalDateTime;
 public class CheckIn {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int checkInId;
     private String key;
     private String feeling;
     private LocalDateTime recordedAt;
+
+    public int getCheckInId() {
+        return checkInId;
+    }
+
+    public void setCheckInId(int checkInId) {
+        this.checkInId = checkInId;
+    }
 
     public String getKey() {
         return key;
