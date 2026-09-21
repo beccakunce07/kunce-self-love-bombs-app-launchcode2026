@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 
-@Entity
 public class CheckInDTO {
 
     @Id

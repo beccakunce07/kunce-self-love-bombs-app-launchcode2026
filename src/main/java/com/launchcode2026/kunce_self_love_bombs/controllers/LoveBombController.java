@@ -24,10 +24,6 @@ public class LoveBombController {
     @Autowired
     private CheckInRepository checkInRepository;
 
-    @OneToMany
-
-
-    //this one is working yay
     @GetMapping("find-all")
     public List<LoveBomb> findAll() {
         return loveBombRepository.findAll();
@@ -35,9 +31,12 @@ public class LoveBombController {
 
     //this one gets a 404 error
     @GetMapping("find-by-key")
-    public ResponseEntity<List<LoveBomb>> getLoveBombsByKey(@RequestParam String key) {
-        List<LoveBomb> loveBombs = loveBombRepository.findByKeyContaining (key);
+    public ResponseEntity<List<LoveBomb>> getLoveBombsByKey(@RequestParam(required = false) String key) {
+        if (key == null || key.trim().isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
 
+        List<LoveBomb> loveBombs = loveBombRepository.findByKeyContaining(key);
         if (loveBombs.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -46,18 +45,21 @@ public class LoveBombController {
 
     //400 error
     @GetMapping("find-by-keyword")
-    public ResponseEntity<List<LoveBomb>> findByMessageContaining (@RequestParam String keyword) {
+    public ResponseEntity<List<LoveBomb>> findByMessageContaining(@RequestParam(required = false) String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
         List<LoveBomb> loveBombs = loveBombRepository.findByMessageContaining(keyword);
         if (loveBombs.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(loveBombs);
     }
-
     //this will (hopefully) use the CYO form on the front endd
 
     @PostMapping("CYO-form")
-    public String handleForm(LoveBomb loveBomb){
+    public String handleForm(@RequestBody LoveBomb loveBomb){
         System.out.println(loveBomb.getMessage());
         loveBombRepository.save(loveBomb);
         System.out.println(loveBomb);

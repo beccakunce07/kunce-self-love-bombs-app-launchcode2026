@@ -19,12 +19,11 @@ public class LoveBomb {
 
     @ManyToMany
     @JoinTable(
-            name = "love_bomb_user", // The name of your third junction table
-            joinColumns = @JoinColumn(name = "love_bomb_id"), // Foreign key for this entity
-            inverseJoinColumns = @JoinColumn(name = "user_id") // Foreign key for the User entity
+            name = "users_love_bombs",
+            joinColumns = @JoinColumn(name = "love_bomb_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> users;
-
 
     public int getLoveBombId() {
         return loveBombId;

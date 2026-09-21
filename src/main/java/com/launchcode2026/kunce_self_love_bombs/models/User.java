@@ -1,4 +1,6 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,28 +10,28 @@ import java.util.List;
 
 @Entity
 public class User {
+
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     private String firstName;
     private String lastName;
     private String username;
     private String email;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
-
-    @OneToMany(cascade = CascadeType.ALL)
-    //i feel like is this many to many? one user may have many love bombs mbut many love bombs can have many users?
-    @JoinTable
+    @ManyToMany(mappedBy = "users")
+    @JsonIgnore
     private List<LoveBomb> loveBombs = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable
+    @JoinColumn(name = "user_id")
     private List<CheckIn> checkIns = new ArrayList<>();
 
-    User() {
+    public User() {
     }
 
     public User(String firstName, String lastName, String username, String email, LocalDate birthday) {
@@ -40,11 +42,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
