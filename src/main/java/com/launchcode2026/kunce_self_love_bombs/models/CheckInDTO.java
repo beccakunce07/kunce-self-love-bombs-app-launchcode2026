@@ -3,14 +3,14 @@ package com.launchcode2026.kunce_self_love_bombs.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class CheckInDTO {
 
     @Id
     private String key;
     private String feeling;
-    private LocalDate recordedAt;
+    private LocalDateTime recordedAt;
 
     public String getKey() {
         return key;
@@ -28,11 +28,11 @@ public class CheckInDTO {
         this.feeling = feeling;
     }
 
-    public LocalDate getRecordedAt() {
+    public LocalDateTime getRecordedAt() {
         return recordedAt;
     }
 
-    public void setRecordedAt(LocalDate recordedAt) {
+    public void setRecordedAt(LocalDateTime recordedAt) {
         this.recordedAt = recordedAt;
     }
 }
