@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
 public class LoveBomb {
     @Id
     @GeneratedValue
@@ -24,6 +23,14 @@ public class LoveBomb {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> users;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_check_ins",
+            joinColumns = @JoinColumn (name = "check_in_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<CheckIn> checkIns;
 
     public int getLoveBombId() {
         return loveBombId;
