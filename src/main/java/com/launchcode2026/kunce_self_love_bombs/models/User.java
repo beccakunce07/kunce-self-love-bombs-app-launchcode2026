@@ -22,13 +22,15 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
-    @ManyToMany(mappedBy = "users")
-    @JsonIgnore
-    private List<LoveBomb> loveBombs = new ArrayList<>();
+//    @ManyToMany(mappedBy = "users")
+//    @JsonIgnore
+//    private List<LoveBomb> loveBombs = new ArrayList<>();
+//
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_id")
+//    private List<CheckIn> checkIns = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private List<CheckIn> checkIns = new ArrayList<>();
+
 
     public User() {
     }

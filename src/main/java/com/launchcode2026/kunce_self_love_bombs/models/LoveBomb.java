@@ -18,18 +18,10 @@ public class LoveBomb {
     @ManyToMany
     @JoinTable(
             name = "users_love_bombs",
-            joinColumns = @JoinColumn(name = "love_bomb_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            joinColumns = @JoinColumn (name = "love_bomb_id"), //primary key
+            inverseJoinColumns = @JoinColumn(name = "user_id") //foreign key
     )
-    private List<User> users;
-
-    @ManyToMany
-    @JoinTable(
-            name = "users_check_ins",
-            joinColumns = @JoinColumn (name = "check_in_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<CheckIn> checkIns;
+    private List<LoveBomb> loveBombs = new ArrayList<>();
 
     public int getLoveBombId() {
         return loveBombId;
