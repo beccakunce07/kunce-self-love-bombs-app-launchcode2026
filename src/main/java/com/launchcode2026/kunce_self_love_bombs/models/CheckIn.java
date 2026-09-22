@@ -16,13 +16,16 @@ public class CheckIn {
     private String feeling;
     private LocalDateTime recordedAt;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_check_ins",
-            joinColumns = @JoinColumn (name = "key"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> users = new ArrayList<>();
+//    @ManyToMany
+//    @JoinTable(
+//            name = "users_check_ins",
+//            joinColumns = @JoinColumn (name = "key"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id")
+//    )
+//    private List<User> users = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "checkIns")
+    private List<User> userList = new ArrayList<>();
 
     public int getCheckInId() {
         return checkInId;
@@ -54,6 +57,14 @@ public class CheckIn {
 
     public void setRecordedAt(LocalDateTime recordedAt) {
         this.recordedAt = recordedAt;
+    }
+
+    public List <User> getUserList(){
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
 }
