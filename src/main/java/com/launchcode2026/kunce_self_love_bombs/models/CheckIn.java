@@ -1,6 +1,7 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.DialectOverride;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,6 +28,13 @@ public class CheckIn {
     @ManyToMany(mappedBy = "checkIns")
     private List<User> userList = new ArrayList<>();
 
+    public CheckIn(){}
+
+    public CheckIn(String key, String feeling, LocalDateTime recordedAt){
+        this.key = key;
+        this.feeling = feeling;
+        this.recordedAt = recordedAt;
+    }
     public int getCheckInId() {
         return checkInId;
     }

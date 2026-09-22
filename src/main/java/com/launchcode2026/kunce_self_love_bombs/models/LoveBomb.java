@@ -15,13 +15,24 @@ public class LoveBomb {
     private String key;
     private LocalDateTime timeSubmitted;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_love_bombs",
-            joinColumns = @JoinColumn (name = "love_bomb_id"), //primary key
-            inverseJoinColumns = @JoinColumn(name = "user_id") //foreign key
-    )
-    private List<User> users = new ArrayList<>();
+//    @ManyToMany
+//    @JoinTable(
+//            name = "users_love_bombs",
+//            joinColumns = @JoinColumn (name = "love_bomb_id"), //primary key
+//            inverseJoinColumns = @JoinColumn(name = "user_id") //foreign key
+//    )
+//    private List<User> users = new ArrayList<>();
+
+    @ManyToMany (mappedBy = "loveBombs")
+    private List<User> userList = new ArrayList<>();
+
+    public LoveBomb(){}
+
+    public LoveBomb(String message, String key, LocalDateTime timeSubmitted){
+        this.message = message;
+        this.key = key;
+        this.timeSubmitted = timeSubmitted;
+    }
 
     public int getLoveBombId() {
         return loveBombId;
@@ -54,4 +65,12 @@ public class LoveBomb {
     public void setTimeSubmitted(LocalDateTime timeSubmitted) {
         this.timeSubmitted = timeSubmitted;
     }
+
+    public List <User> getUserList() {return userList;}
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+
 }
