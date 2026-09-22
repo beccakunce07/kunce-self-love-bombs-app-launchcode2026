@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("love-bomb")
+
 public class LoveBombController {
 
     @Autowired
@@ -23,13 +24,14 @@ public class LoveBombController {
     @Autowired
     private CheckInRepository checkInRepository;
 
+    //this one is working!!
     @GetMapping("find-all")
     public List<LoveBomb> findAll() {
         return loveBombRepository.findAll();
     }
 
     //this one gets a 404 error
-    @GetMapping("find-by-key")
+    @GetMapping("find-by-category-key")
     public ResponseEntity<List<LoveBomb>> getLoveBombsByKey(@RequestParam(required = false) String categoryKey) {
         if (categoryKey == null || categoryKey.trim().isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -42,7 +44,7 @@ public class LoveBombController {
         return ResponseEntity.ok(loveBombs);
     }
 
-    //400 error
+    //
     @GetMapping("find-by-keyword")
     public ResponseEntity<List<LoveBomb>> findByMessageContaining(@RequestParam(required = false) String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {

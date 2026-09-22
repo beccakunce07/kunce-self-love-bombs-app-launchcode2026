@@ -1,11 +1,8 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.DialectOverride;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class CheckIn {
@@ -14,7 +11,7 @@ public class CheckIn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int checkInId;
 
-    private String key;
+    private String checkInKey;
     private String feeling;
     private LocalDateTime recordedAt;
 
@@ -24,8 +21,8 @@ public class CheckIn {
 
     public CheckIn(){}
 
-    public CheckIn(String key, String feeling, LocalDateTime recordedAt){
-        this.key = key;
+    public CheckIn(String checkInKey, String feeling, LocalDateTime recordedAt){
+        this.checkInKey = checkInKey;
         this.feeling = feeling;
         this.recordedAt = recordedAt;
     }
@@ -37,6 +34,7 @@ public class CheckIn {
     public void setUser(User user) {
         this.user = user;
     }
+
     public int getCheckInId() {
         return checkInId;
     }
@@ -45,12 +43,12 @@ public class CheckIn {
         this.checkInId = checkInId;
     }
 
-    public String getKey() {
-        return key;
+    public String getCheckInKey() {
+        return checkInKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setCheckInKey(String checkInKey) {
+        this.checkInKey = checkInKey;
     }
 
     public String getFeeling() {
