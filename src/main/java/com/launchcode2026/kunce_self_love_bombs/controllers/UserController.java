@@ -25,7 +25,7 @@ public class UserController {
     private CheckInRepository checkInRepository;
 
     @GetMapping
-    public  String user(){
+    public String user(){
         return "Welcome to the user home page";
     }
 
@@ -34,36 +34,34 @@ public class UserController {
         return "Hello World";
     }
 
-    @PostMapping ("/test-user") //this is connected and running - there is validation code in the front end - these need to be checked once the front end is connected.
-    public User testUser(){
-        User test = new User ("Becca", "Kunce", "beccakunce03", "kunceie33@gmail.com", LocalDate.of(1989, 3, 3));
-        userRepository.save(test);
-        return test;
-    }
+    @GetMapping ("/test")
+    public Optional<User> findByUsername() {
+        return userRepository.findByUsername("beccakunce03");
+        }
 
-    //this one is getting a 500 error
     @GetMapping("/find-all")
     public List<User> findAll() {
         return userRepository.findAll();
     } //500 internal server error
 
     //this one i dont even know how to search it - i'm searching by just the data so like becca or 3 for id or first name?
-    @GetMapping("/{id}")
-    public Optional<User> findById(@PathVariable Long id) {
-        return userRepository.findById(id);
-    }
-
-    @GetMapping("/{firstName}")
-    public Optional<User> findByFirstName(@PathVariable String firstName) {
-        return userRepository.findByFirstNameIgnoreCase(firstName);
-    }
-
-    @GetMapping("{lastName}")
-    public Optional<User> findByLastName(@PathVariable String lastName) {
-        return userRepository.findByLastNameIgnoreCase(lastName);
-    }
+//    @GetMapping("/{id}")
+//    public Optional<User> findById(@PathVariable int id) {
+//        return userRepository.findById(id);
+//    }
+//
+//    @GetMapping("/{firstName}")
+//    public Optional<User> findByFirstName(@PathVariable String firstName) {
+//        return userRepository.findByFirstName(firstName);
+//    }
+//
+//    @GetMapping("{lastName}")
+//    public Optional<User> findByLastName(@PathVariable String lastName) {
+//        return userRepository.findByLastName (lastName);
+//    }
 
     @PostMapping("create-form")
+    @ResponseBody
     public String handleForm (User user) {
         System.out.println(user);
         userRepository.save(user);
