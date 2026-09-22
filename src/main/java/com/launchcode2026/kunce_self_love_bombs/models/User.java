@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int userId;
     private String firstName;
     private String lastName;
@@ -23,11 +24,10 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
-    @ManyToMany(mappedBy = "users")
-    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<LoveBomb> loveBombs = new ArrayList<>();
 
-    @ManyToMany
+    @OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
     private List<CheckIn> checkIns = new ArrayList<>();
 
     public User() {
@@ -39,6 +39,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.birthday = birthday;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {

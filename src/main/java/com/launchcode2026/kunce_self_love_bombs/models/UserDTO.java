@@ -8,11 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 public class UserDTO {
-
-
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
     private String firstName;

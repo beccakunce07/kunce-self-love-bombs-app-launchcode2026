@@ -4,7 +4,6 @@ import com.launchcode2026.kunce_self_love_bombs.models.LoveBomb;
 import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
-import jakarta.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,12 +30,12 @@ public class LoveBombController {
 
     //this one gets a 404 error
     @GetMapping("find-by-key")
-    public ResponseEntity<List<LoveBomb>> getLoveBombsByKey(@RequestParam(required = false) String key) {
-        if (key == null || key.trim().isEmpty()) {
+    public ResponseEntity<List<LoveBomb>> getLoveBombsByKey(@RequestParam(required = false) String categoryKey) {
+        if (categoryKey == null || categoryKey.trim().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
-        List<LoveBomb> loveBombs = loveBombRepository.findByKeyContaining(key);
+        List<LoveBomb> loveBombs = loveBombRepository.findByCategoryKeyContaining(categoryKey);
         if (loveBombs.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -63,6 +62,6 @@ public class LoveBombController {
         System.out.println(loveBomb.getMessage());
         loveBombRepository.save(loveBomb);
         System.out.println(loveBomb);
-        return "Hello, here is your Love Bomb: " + loveBomb.getMessage() + " regarding " + loveBomb.getKey() + ". This was submitted at " + loveBomb.getTimeSubmitted();
+        return "Hello, here is your Love Bomb: " + loveBomb.getMessage() + " regarding " + loveBomb.getCategoryKey() + ". This was submitted at " + loveBomb.getTimeSubmitted();
     }
 }

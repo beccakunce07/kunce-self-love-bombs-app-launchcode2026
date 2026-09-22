@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.launchcode2026</groupId>
-	<artifactId>kunce-self-love-bombs</artifactId>
+	<artifactId>kunce_self_love_bombs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>

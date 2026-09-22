@@ -3,16 +3,15 @@ package com.launchcode2026.kunce_self_love_bombs.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class LoveBomb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int loveBombId;
+
     private String message;
-    private String key;
+    private String categoryKey;
     private LocalDateTime timeSubmitted;
 
 //    @ManyToMany
@@ -23,14 +22,23 @@ public class LoveBomb {
 //    )
 //    private List<User> users = new ArrayList<>();
 
-    @ManyToMany (mappedBy = "loveBombs")
-    private List<User> userList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
 
     public LoveBomb(){}
 
-    public LoveBomb(String message, String key, LocalDateTime timeSubmitted){
+    public LoveBomb(String message, String categoryKey, LocalDateTime timeSubmitted){
         this.message = message;
-        this.key = key;
+        this.categoryKey = categoryKey;
         this.timeSubmitted = timeSubmitted;
     }
 
@@ -50,12 +58,12 @@ public class LoveBomb {
         this.message = message;
     }
 
-    public String getKey() {
-        return key;
+    public String getCategoryKey() {
+        return categoryKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setCategoryKey(String key) {
+        this.categoryKey = categoryKey;
     }
 
     public LocalDateTime getTimeSubmitted() {
@@ -66,11 +74,6 @@ public class LoveBomb {
         this.timeSubmitted = timeSubmitted;
     }
 
-    public List <User> getUserList() {return userList;}
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
 
 
 }
