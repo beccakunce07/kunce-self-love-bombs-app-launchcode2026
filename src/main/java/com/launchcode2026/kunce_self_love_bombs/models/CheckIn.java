@@ -19,10 +19,10 @@ public class CheckIn {
     @ManyToMany
     @JoinTable(
             name = "users_check_ins",
-            joinColumns = @JoinColumn (name = "check_in_id)"),
+            joinColumns = @JoinColumn (name = "key"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<CheckIn> checkIns = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     public int getCheckInId() {
         return checkInId;

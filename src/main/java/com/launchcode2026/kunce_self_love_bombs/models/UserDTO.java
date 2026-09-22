@@ -1,5 +1,7 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -7,7 +9,11 @@ import java.time.LocalDate;
 
 public class UserDTO {
 
+
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
 
     private String firstName;
     private String lastName;
@@ -16,6 +22,14 @@ public class UserDTO {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId =userId;
+    }
 
     public String getFirstName() {
         return firstName;

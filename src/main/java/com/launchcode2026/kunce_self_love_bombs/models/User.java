@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int userId;
     private String firstName;
     private String lastName;
     private String username;
@@ -22,17 +23,12 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
-//    @ManyToMany(mappedBy = "users")
-//    @JsonIgnore
-//    private List<LoveBomb> loveBombs = new ArrayList<>();
-//
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id")
-//    private List<CheckIn> checkIns = new ArrayList<>();
+    @ManyToMany(mappedBy = "users")
+    @JsonIgnore
+    private List<LoveBomb> loveBombs = new ArrayList<>();
 
-
-
-
+    @ManyToMany
+    private List<CheckIn> checkIns = new ArrayList<>();
 
     public User() {
     }
@@ -43,14 +39,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.birthday = birthday;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -91,6 +79,22 @@ public class User {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public List<LoveBomb> getLoveBomb () {
+        return loveBombs;
+    }
+
+    public void setLoveBombs(LoveBomb loveBomb){
+        this.loveBombs.add(loveBomb);
+    }
+
+    public List<CheckIn> getCheckIns(){
+        return checkIns;
+    }
+
+    public void setCheckIns(CheckIn checkIn){
+        this.checkIns.add(checkIn);
     }
 
 }

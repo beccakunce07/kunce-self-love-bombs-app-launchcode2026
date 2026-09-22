@@ -21,7 +21,7 @@ public class LoveBomb {
             joinColumns = @JoinColumn (name = "love_bomb_id"), //primary key
             inverseJoinColumns = @JoinColumn(name = "user_id") //foreign key
     )
-    private List<LoveBomb> loveBombs = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     public int getLoveBombId() {
         return loveBombId;
