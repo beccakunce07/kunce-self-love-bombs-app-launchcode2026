@@ -20,6 +20,7 @@ public class CheckIn {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties
     private User user;
 
     @ManyToMany (fetch = FetchType.LAZY)
@@ -28,8 +29,9 @@ public class CheckIn {
             joinColumns = @JoinColumn(name = "check_in_id"),
             inverseJoinColumns = @JoinColumn(name = "love_bomb_id")
     )
-    @JsonIgnoreProperties("checkIns") //doing this so it doesnt get caught in an infinite loop sice check ins live in both user and love bomb
+    @JsonIgnoreProperties //doing this so it doesnt get caught in an infinite loop sice check ins live in both user and love bomb
     private List<LoveBomb> loveBombs = new ArrayList<>();
+
 
 
     public CheckIn(){}

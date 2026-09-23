@@ -9,7 +9,10 @@
       <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/CheckIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/CheckIn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/LoveBomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/LoveBomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/components/CYOForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/components/CYOForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/READMEBACK.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/READMEFRONT.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

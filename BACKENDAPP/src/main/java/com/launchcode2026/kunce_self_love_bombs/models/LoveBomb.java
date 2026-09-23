@@ -1,11 +1,11 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,26 +16,20 @@ public class LoveBomb {
     private int loveBombId;
 
     private String message;
-    @JsonProperty ("categoryKey")
-    private String categoryKey;
-    private Instant timeSubmitted;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "users_love_bombs",
-//            joinColumns = @JoinColumn (name = "love_bomb_id"), //primary key
-//            inverseJoinColumns = @JoinColumn(name = "user_id") //foreign key
-//    )
-//    private List<User> users = new ArrayList<>();
+    @JsonProperty("categoryKey")
+    private String categoryKey;
+
+    private Instant timeSubmitted;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore // This breaks the infinite backend JSON loop
     private User user;
 
-    @ManyToMany (mappedBy = "loveBombs", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("loveBombs")
+    @ManyToMany(mappedBy = "loveBombs", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<CheckIn> checkIns = new ArrayList<>();
-
 
     public LoveBomb(){}
 
@@ -68,7 +62,7 @@ public class LoveBomb {
     }
 
     public void setCategoryKey(String key) {
-        this.categoryKey = categoryKey;
+        this.categoryKey = key;
     }
 
     public Instant getTimeSubmitted() {

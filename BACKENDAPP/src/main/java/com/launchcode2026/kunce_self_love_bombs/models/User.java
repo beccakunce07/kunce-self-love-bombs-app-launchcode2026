@@ -1,6 +1,7 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,9 +26,11 @@ public class User {
     private LocalDate birthday;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
     private List<LoveBomb> loveBombs = new ArrayList<>();
 
     @OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties ("user")
     private List<CheckIn> checkIns = new ArrayList<>();
 
     public User() {

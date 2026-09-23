@@ -23,6 +23,7 @@ function CYOForm() {
     let newErrors = {};
     if (!formData.message || !formData.message.trim()) newErrors.message = "Whoops. message is required.";
     if (!formData.categoryKey) newErrors.categoryKey = "uh oh. please add a category this relates to."
+    // if (!formData.userId) newErrors.userId = 
   
 
   setErrors(newErrors);
@@ -51,6 +52,12 @@ function CYOForm() {
             categoryKey: formData.categoryKey
           })
         });
+
+        if (!userId) {
+          console.error("Cannot submit form: userId is missing or undefined.");
+          setErrors({ submit: "You must be logged in to save a message." });
+          return;
+        }
 
         if (response.ok){
           const savedMessage = await response.json();

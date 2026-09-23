@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("love-bomb")
-@CrossOrigin ("http://localhost:5173/")
+@RequestMapping("/love-bomb")
+@CrossOrigin (origins = "http://localhost:5173")
 
 public class LoveBombController {
 
@@ -28,12 +28,12 @@ public class LoveBombController {
     private CheckInRepository checkInRepository;
 
     //this one is working!!
-    @GetMapping("find-all")
+    @GetMapping("/find-all")
     public List<LoveBomb> findAll() {
         return loveBombRepository.findAll();
     }
 
-    //this one gets a 404 error
+
     @PostMapping("/user/{userId}")
     public ResponseEntity<?> createLoveBomb (@PathVariable("userId") int userId, @RequestBody LoveBomb loveBomb){
         User user = userRepository.findByUserId(userId);
