@@ -1,10 +1,13 @@
 package com.launchcode2026.kunce_self_love_bombs.controllers;
 
 import com.launchcode2026.kunce_self_love_bombs.models.CheckIn;
+import com.launchcode2026.kunce_self_love_bombs.models.User;
 import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
+import jakarta.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -24,14 +27,15 @@ public class CheckInController {
     @Autowired
     private CheckInRepository checkInRepository;
 
+
     //this is giving me a bad request
-    @PostMapping("new-check-in")
-    public CheckIn addCheckIn(@RequestBody CheckIn checkIn) {
-        if (checkIn.getRecordedAt() == null) {
-            checkIn.setRecordedAt(LocalDateTime.now());
-        }
-        return checkInRepository.save(checkIn);
-    }
+//    @PostMapping("new-check-in")
+//    public CheckIn addCheckIn(@RequestBody CheckIn checkIn) {
+//        if (checkIn.getRecordedAt() == null) {
+//            checkIn.setRecordedAt(LocalDateTime.now());
+//        }
+//        return checkInRepository.save(checkIn);
+//    }
 
 //this is working
     @GetMapping("testing")
@@ -39,12 +43,23 @@ public class CheckInController {
         return "I am here";
     }
 
-    //this is getting a 500 request
-    @GetMapping("find-all")
-    public List<CheckIn> getAll(){
-        return checkInRepository.findAll();
+    @PostMapping("/create-check-in")
+    public ResponseEntity<CheckIn> createCheckIn (@RequestBody CheckIn checkIn){
+        return ResponseEntity.ok(checkInRepository.save(checkIn));}
 
+    @GetMapping("/find-by-user-id-{userId}")
+    public ResponseEntity<List<CheckIn>> getCheckInsByUserId(@PathVariable int userId){
+        List<CheckIn> checkIns = checkInRepository.findCheckInByUserId(userId);
+        return ResponseEntity.ok(checkIns);
     }
+
+
+    //this is getting a 500 request
+//    @GetMapping("find-all")
+//    public List<CheckIn> getAll(){
+//        return checkInRepository.findAll();
+//
+//    }
 
 }
 

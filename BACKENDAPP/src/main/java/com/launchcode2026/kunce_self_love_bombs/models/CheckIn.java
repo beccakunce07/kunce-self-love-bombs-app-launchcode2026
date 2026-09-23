@@ -2,6 +2,7 @@ package com.launchcode2026.kunce_self_love_bombs.models;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,15 +14,15 @@ public class CheckIn {
 
     private String checkInKey;
     private String feeling;
-    private LocalDateTime recordedAt;
+    private Instant recordedAt;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     public CheckIn(){}
 
-    public CheckIn(String checkInKey, String feeling, LocalDateTime recordedAt){
+    public CheckIn(String checkInKey, String feeling, Instant recordedAt){
         this.checkInKey = checkInKey;
         this.feeling = feeling;
         this.recordedAt = recordedAt;
@@ -59,11 +60,11 @@ public class CheckIn {
         this.feeling = feeling;
     }
 
-    public LocalDateTime getRecordedAt() {
+    public Instant getRecordedAt() {
         return recordedAt;
     }
 
-    public void setRecordedAt(LocalDateTime recordedAt) {
+    public void setRecordedAt(Instant recordedAt) {
         this.recordedAt = recordedAt;
     }
 

@@ -40,7 +40,7 @@ const [formData, setFormData] = useState({
     return Object.keys(newErrors).length === 0; // Will return true if no errors
     };
 
-    const handleSubmit = (m) => {
+    const handleUserSubmit = (m) => {
         m.preventDefault();
 
         //so if the data entered passes the validation checks...
@@ -109,7 +109,7 @@ const [formData, setFormData] = useState({
       </button>
  
       {showForm && ( 
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleUserSubmit}>
           <div className = "form-group">
             <label htmlFor="firstName">First Name:</label>
           <input

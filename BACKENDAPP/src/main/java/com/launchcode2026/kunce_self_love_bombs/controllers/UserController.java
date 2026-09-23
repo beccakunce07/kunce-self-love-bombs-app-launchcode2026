@@ -1,5 +1,6 @@
 package com.launchcode2026.kunce_self_love_bombs.controllers;
 
+import com.launchcode2026.kunce_self_love_bombs.models.CheckIn;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
 import com.launchcode2026.kunce_self_love_bombs.models.User;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
@@ -25,8 +26,8 @@ public class UserController {
 //    @Autowired
 //    private LoveBombRepository loveBombRepository;
 //
-//    @Autowired
-//    private CheckInRepository checkInRepository;
+    @Autowired
+    private CheckInRepository checkInRepository;
 
     @GetMapping("/find-all")
     public List<User> findAll() {
@@ -52,6 +53,7 @@ public class UserController {
     @GetMapping("find-by-userId-{userId}")
     public List<User> findByUserId(@PathVariable("userId") int userId) {
         return userRepository.findByUserId(userId);}
+
 
 
 
