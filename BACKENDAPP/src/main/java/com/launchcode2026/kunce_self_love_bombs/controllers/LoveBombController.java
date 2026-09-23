@@ -1,9 +1,11 @@
 package com.launchcode2026.kunce_self_love_bombs.controllers;
 
 import com.launchcode2026.kunce_self_love_bombs.models.LoveBomb;
+import com.launchcode2026.kunce_self_love_bombs.models.User;
 import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +34,24 @@ public class LoveBombController {
     }
 
     //this one gets a 404 error
+    @PostMapping("/user/{userId}")
+    public ResponseEntity<?> createLoveBomb (@PathVariable int userId, @RequestBody LoveBomb loveBomb){
+        User user = userRepository.findByUserId(userId);
+        if (user == null) {
+            return ResponseEntity.status(404).body("oops. No user found with id: " + userId);
+        }
+        loveBomb.setUser(user);
+
+        LoveBomb savedLoveBomb = loveBombRepository.save(loveBomb);
+
+        return ResponseEntity.ok(savedLoveBomb);
+    }
+
     @GetMapping("find-by-category-key")
     public ResponseEntity<List<LoveBomb>> getLoveBombsByKey(@RequestParam(required = false) String categoryKey) {
         if (categoryKey == null || categoryKey.trim().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-
         List<LoveBomb> loveBombs = loveBombRepository.findByCategoryKeyContaining(categoryKey);
         if (loveBombs.isEmpty()) {
             return ResponseEntity.noContent().build();
