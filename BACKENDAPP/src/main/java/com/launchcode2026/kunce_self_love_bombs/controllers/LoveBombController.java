@@ -35,7 +35,7 @@ public class LoveBombController {
 
     //this one gets a 404 error
     @PostMapping("/user/{userId}")
-    public ResponseEntity<?> createLoveBomb (@PathVariable int userId, @RequestBody LoveBomb loveBomb){
+    public ResponseEntity<?> createLoveBomb (@PathVariable("userId") int userId, @RequestBody LoveBomb loveBomb){
         User user = userRepository.findByUserId(userId);
         if (user == null) {
             return ResponseEntity.status(404).body("oops. No user found with id: " + userId);

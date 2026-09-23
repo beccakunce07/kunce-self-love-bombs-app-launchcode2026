@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7a5cb6e0-b74a-48e7-a2c3-36128d180c02" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/CheckIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/CheckIn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/LoveBomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/LoveBomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/components/CYOForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/components/CYOForm.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

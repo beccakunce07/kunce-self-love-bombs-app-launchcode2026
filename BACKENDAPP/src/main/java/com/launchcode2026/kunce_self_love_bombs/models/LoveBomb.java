@@ -1,5 +1,7 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -14,6 +16,7 @@ public class LoveBomb {
     private int loveBombId;
 
     private String message;
+    @JsonProperty ("categoryKey")
     private String categoryKey;
     private Instant timeSubmitted;
 
@@ -30,7 +33,11 @@ public class LoveBomb {
     private User user;
 
     @ManyToMany (mappedBy = "loveBombs", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("loveBombs")
     private List<CheckIn> checkIns = new ArrayList<>();
+
+
+    public LoveBomb(){}
 
     public User getUser() {
         return user;
@@ -38,14 +45,6 @@ public class LoveBomb {
 
     public void setUser(User user){
         this.user = user;
-    }
-
-    public LoveBomb(){}
-
-    public LoveBomb(String message, String categoryKey, Instant timeSubmitted){
-        this.message = message;
-        this.categoryKey = categoryKey;
-        this.timeSubmitted = timeSubmitted;
     }
 
     public int getLoveBombId() {

@@ -1,55 +1,120 @@
 import React, { useState } from 'react';
 
 function CYOForm() {
-  const [input, setInput] = useState("");
+  const userId = 1;
+
   const [messageList, setMessageList] = useState([]);
-  const [editId, setEditId] = useState(null);
+  const [editMessageId, setEditMessageId] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [errors, setErrors] = useState({});
 
+  const [formData, setFormData] = useState({
+    message: "",
+    categoryKey: ""
+  }
+  )
+
+  const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData({ ...formData, [name]: value });
+  };
+
+  const validate = () => {
+    let newErrors = {};
+    if (!formData.message || !formData.message.trim()) newErrors.message = "Whoops. message is required.";
+    if (!formData.categoryKey) newErrors.categoryKey = "uh oh. please add a category this relates to."
   
-  const handleSubmit = (m) => {
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
+  const handleMessageSubmit = (m) => {
     m.preventDefault();
-    if (!input.trim()) return; //prevents empty submits being added to the bank
 
-    if (editId) {
-      setMessageList(messageList.map(item => item.id === editId ? { ...item, text: input } : item));
-      setEditId(null);
+
+    if (!validate()) return;
+
+      if (editMessageId) {
+        setMessageList(messageList.map(item => item.messageId === editMessageId ? {...item, ...formData} : item));
+        setEditMessageId(null);
+        setFormData({message: "", categoryKey: ""});
+        setShowForm(false);
     } else {
-      setMessageList([...messageList, { id: Date.now(), text: input }]);
-    }
-    setInput("");
+      const addLoveBomb = async () => {
+        try {
+          const response = await fetch(`http://localhost:8080/love-bomb/user/${userId}`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            message: formData.message,
+            categoryKey: formData.categoryKey
+          })
+        });
+
+        if (response.ok){
+          const savedMessage = await response.json();
+          setMessageList([...messageList, savedMessage]);
+          console.log("Love Bomb added successfully. Thank you.", savedMessage);
+        }
+        setFormData({ message: "", categoryKey: "" });
+        setShowForm(false);
+        setErrors({});
+        } catch (error) {
+          console.error('Oh no. Error adding love Bomb.', error)
+          setErrors({ submit: "Failed to save message. Please try again." });
+        }
+    
+  }
+
+    addLoveBomb();
+  }
+}
+    
+  ;
+
+  const deleteItem = (messageId) => {
+    setMessageList(messageList.filter(item => item.messageId !== messageId));
   };
 
-  const deleteItem = (id) => {
-    setMessageList(messageList.filter(item => item.id !== id));
-  };
-
-  const startEdit = (item) => {
-    setEditId(item.id);
-    setInput(item.text);
-    setShowForm(true); // Ensure form is visible when editing
+const startEdit = (item) => {
+    setEditMessageId(item.messageId);
+    setFormData({
+      message: item.message || item.text || "",
+      categoryKey: item.categoryKey || ""
+    });
+    setShowForm(true); 
   };
 
   return (
     <div> {/* button to show or close form. using logic */}
-      <button className='button1' onClick={() => setShowForm(!showForm)}>
+      <button type = "button" className='button1' onClick={() => setShowForm(!showForm)}>
         {showForm ? "Close Form" : "⟢Let's Create⟢"}
       </button>
  
       {showForm && ( 
-        <form className="CYOform" onSubmit={handleSubmit}>
+        <form className="CYOform" onSubmit={handleMessageSubmit}>
+          <p>{errors.submit}</p>
           <div className = "form-group">
             <label htmlFor="message">Speak Kindly to Yourself Here Please:</label>
           <input 
-            value={input} 
-            onChange={(m) => setInput(m.target.value)} 
-            placeholder="i.e. 'I am loved and adored always.'"
-          />
+              name="message"
+              id="message"
+              value={formData.message} 
+              onChange={handleChange}
+              placeholder="i.e. 'I am loved and adored always.'"
+            />
+            <p>{errors.message}</p>
           </div>
           
           <div className = "form-group">
-          <label htmlFor="key">This relates to my:</label>
-          <select id="key">
+          <label htmlFor="categoryKey">This relates to my:</label>
+          <select 
+          id="categoryKey"
+          name="categoryKey"
+          value = {formData.categoryKey}
+          onChange={handleChange}>
+          
             <option value="Finances">finances</option>
             <option value="Body">body</option>
             <option value="Relationship">relationship</option>
@@ -57,30 +122,36 @@ function CYOForm() {
             <option value="Life In General">life in general</option>
             <option value="Something Else">something else</option>
           </select>
+          <p>{errors.categoryKey}</p>
           </div>
-          <input type="hidden" id="submissionTime" name="submissionTime"></input>
+          <input type="hidden" id="timeSubmitted" name="timeSubmitted"></input>
 
           <button className="button1" type="submit">
-            {editId ? "Update Bank" : "Add to Bank"}
+            {editMessageId ? "Update Bank" : "Add to Bank"}
           </button>
         </form>
         
       )}
       
       <ul>
-        {messageList.map((item) => (
-          <ul key={item.id}>
+        {messageList.map((item, index) => {
+          const itemKey = item.messageId || item.id ||index;
+          return (
+          <li key={itemKey}>
             <p>{item.text}</p>
+            <p><em>[{item.categoryKey}]</em>: {item.message}</p>
             <button className="button1" onClick={() => startEdit(item)}>Edit</button>
             <button className="button3" onClick={() => deleteItem(item.id)}>Delete</button>
-          </ul>
-        ))}
+          </li>
+          );
+        }
+      )}
       </ul>
       
     </div> 
 
     
   ); 
-}
+};
 
 export default CYOForm;

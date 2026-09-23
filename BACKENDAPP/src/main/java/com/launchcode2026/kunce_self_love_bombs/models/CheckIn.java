@@ -1,5 +1,6 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -27,6 +28,7 @@ public class CheckIn {
             joinColumns = @JoinColumn(name = "check_in_id"),
             inverseJoinColumns = @JoinColumn(name = "love_bomb_id")
     )
+    @JsonIgnoreProperties("checkIns") //doing this so it doesnt get caught in an infinite loop sice check ins live in both user and love bomb
     private List<LoveBomb> loveBombs = new ArrayList<>();
 
 
