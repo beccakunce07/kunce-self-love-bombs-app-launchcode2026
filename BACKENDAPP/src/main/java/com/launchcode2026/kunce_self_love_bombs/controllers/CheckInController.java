@@ -1,17 +1,13 @@
 package com.launchcode2026.kunce_self_love_bombs.controllers;
 
 import com.launchcode2026.kunce_self_love_bombs.models.CheckIn;
-import com.launchcode2026.kunce_self_love_bombs.models.User;
 import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
-import jakarta.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -49,17 +45,15 @@ public class CheckInController {
 
     @GetMapping("/find-by-user-id-{userId}")
     public ResponseEntity<List<CheckIn>> getCheckInsByUserId(@PathVariable int userId){
-        List<CheckIn> checkIns = checkInRepository.findCheckInByUserId(userId);
+        List<CheckIn> checkIns = checkInRepository.findByUser_userId(userId);
         return ResponseEntity.ok(checkIns);
     }
 
+    @GetMapping("find-all")
+    public List<CheckIn> getAll(){
+        return checkInRepository.findAll();
 
-    //this is getting a 500 request
-//    @GetMapping("find-all")
-//    public List<CheckIn> getAll(){
-//        return checkInRepository.findAll();
-//
-//    }
+    }
 
 }
 

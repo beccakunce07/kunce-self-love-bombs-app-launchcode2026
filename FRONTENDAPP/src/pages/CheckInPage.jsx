@@ -12,8 +12,7 @@ function CheckInPage () {
 
   const validate = () => {
     let newErrors = {};
-    if (!feeling) newErrors.feeling = "oops. please choose a feeling";
-    if (!categoryKey) newErrors.categoryKey = "whoopsie poopsie. please choose a category"
+    if (!feeling && !categoryKey) newErrors = "oops. please check-in with both a feeling and a category";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0
@@ -42,9 +41,7 @@ function CheckInPage () {
               console.log("Check-in added successfully. Thank you.", savedCheckIn);
             }
 
-            //clearing the use state
-            setFeeling("");
-            setCategoryKey("");
+         
 
             setErrors({});
           } catch (error){
@@ -65,25 +62,25 @@ function CheckInPage () {
       {errors.categoryKey && <p className="error">{errors.categoryKey}</p>}
 
       <div className = "button-container">
-      <button className = "button1" onClick={() => setFeeling("sad")}>Sad</button>
-      <button className = "button1" onClick={() => setFeeling("angry")}>Angry</button>
-      <button className = "button1" onClick={() => setFeeling("depressed")}>Depressed</button>
-      <button className = "button1" onClick={() => setFeeling("overwhelmed")}>Overwhelmed</button>
-      <button className = "button1" onClick={() => setFeeling("happy")}>Happy</button>
-      <button className = "button1" onClick={() => setFeeling("excited")}>Excited</button>
-      <button className = "button1" onClick={() => setFeeling("neutral")}>Neutral</button>
+      <button type = "button" className = "button1" onClick={() => setFeeling("sad")}>Sad</button>
+      <button type = "button" className = "button1" onClick={() => setFeeling("angry")}>Angry</button>
+      <button type = "button" className = "button1" onClick={() => setFeeling("depressed")}>Depressed</button>
+      <button type = "button" className = "button1" onClick={() => setFeeling("overwhelmed")}>Overwhelmed</button>
+      <button type = "button" className = "button1" onClick={() => setFeeling("happy")}>Happy</button>
+      <button type = "button" className = "button1" onClick={() => setFeeling("excited")}>Excited</button>
+      <button type = "button" className = "button1" onClick={() => setFeeling("neutral")}>Neutral</button>
       </div>
       <p>Today I am feeling {feeling.toLocaleLowerCase()}</p>
 
       <h3> About my...</h3>
       
       <div className = "button-container">
-      <button className = "button2" onClick={() => setCategoryKey("finances")}>Finances</button>
-      <button className = "button2" onClick={() => setCategoryKey("body")}>Body</button>
-      <button className = "button2" onClick={() => setCategoryKey("relationship")}>Relationship</button>
-      <button className = "button2" onClick={() => setCategoryKey("purpose")}>Purpose</button>
-      <button className = "button2" onClick={() => setCategoryKey("life in general")}>Life in general</button>
-      <button className = "button2" onClick={() => setCategoryKey("something else")}>Something Else</button>
+      <button type = "button" className = "button2" onClick={() => setCategoryKey("finances")}>Finances</button>
+      <button type = "button" className = "button2" onClick={() => setCategoryKey("body")}>Body</button>
+      <button type = "button" className = "button2" onClick={() => setCategoryKey("relationship")}>Relationship</button>
+      <button type = "button" className = "button2" onClick={() => setCategoryKey("purpose")}>Purpose</button>
+      <button type = "button" className = "button2" onClick={() => setCategoryKey("life in general")}>Life in general</button>
+      <button type = "button" className = "button2" onClick={() => setCategoryKey("something else")}>Something Else</button>
       </div>
       
       <p>About my {categoryKey}.</p>   
