@@ -49,6 +49,11 @@ public class UserController {
     public List<User> findByUsername(@PathVariable("username") String username) {
         return userRepository.findByUsernameIgnoreCase(username);}
 
+    @GetMapping("find-by-userId-{userId}")
+    public List<User> findByUserId(@PathVariable("userId") int userId) {
+        return userRepository.findByUserId(userId);}
+
+
 
 
     //this one i dont even know how to search it - i'm searching by just the data so like becca or 3 for id or first name?
