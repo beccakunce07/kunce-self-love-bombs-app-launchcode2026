@@ -5,27 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a5cb6e0-b74a-48e7-a2c3-36128d180c02" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/KunceSelfLoveBombsApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/CheckInController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/CheckIn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/CheckInDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/LoveBomb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/LoveBombDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/UserDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/repositories/CheckInRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/repositories/LoveBombRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/launchcode2026/kunce_self_love_bombs/repositories/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/launchcode2026/kunce_self_love_bombs/KunceSelfLoveBombsApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/CheckInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/CheckInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/components/CreateUserForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/components/CreateUserForm.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +73,7 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "beccatryingthis",
+    "git-widget-placeholder": "beccanew",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/beccakunce/Desktop/LaunchCode/Coursework/Unit-2/unit-2-self-love-bombs-appBK/kunce-self-love-bombs-app-launchcode2026",

@@ -13,7 +13,7 @@ const [formData, setFormData] = useState({
   //creating our useState variables
   const [errors, setErrors] = useState({});
   const [user, setUser] = useState([]);
-  const [editId, setEditId] = useState(null);
+  const [editUserId, setEditUserId] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
   const handleChange = (e) => {
@@ -29,6 +29,7 @@ const [formData, setFormData] = useState({
     if (!formData.lastName.trim()) newErrors.lastName = "Whoopsie Poopsie. Last name is required.";
     if (!formData.username.trim()) newErrors.username = "Oopsie Daises. Username is required.";
     if (!formData.email.trim()) newErrors.email = "Oh dear. Email is required,:"
+    if (!formData.birthday.trim()) newErrors.birthday = "Oahr naorhhh. Birthday is required. "
     
     // Validation -- checks if the email entered does not include '@'
     if (!formData.email.includes("@")) {
@@ -44,27 +45,46 @@ const [formData, setFormData] = useState({
 
         //so if the data entered passes the validation checks...
     if (validate()) {
-      if (editId) {
+      if (editUserId) {
         // Edit user
-        setUser(user.map(item => item.id === editId ? { ...item, ...formData } : item));
-        setEditId(null);
+        setUser(user.map(item => item.userId === editUserId ? { ...item, ...formData } : item));
+        setEditUserId(null);
       } else {
         // Add new user
-        setUser([...user, { id: Date.now(), ...formData }]);
-        console.log("User added successfully. Thank you.", formData);
+        const addUser = async() => { //a cute lil anon function to get us through the fetching phase
+          try{
+            const response = await fetch ('http://localhost:8080/user/create-form', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(formData)
+            })
+
+            if (response.ok){
+            const savedUser = await response.json();
+            setUser([...user, savedUser]);
+            console.log("User added successfully. Thank you.", savedUser);
+              //resetting the form back to empty strings after submission
+            
+            setErrors({});
+            }} catch (error) {
+              console.error('Oh no. Error adding user:', error)
+            }
+          }
+
+          addUser();
+        } 
+        
       }
-      //resetting the form back to empty strings after submission
-      setFormData({ firstName: "", lastName: "", username: "", email: "" });
-      setErrors({});
+   
     }
-    }
-      
-    const deleteItem = (id) => {
-        setUser(user.filter(item => item.id !== id));
+    
+    //delete user 
+    const deleteItem = (targetUserId) => {
+        setUser(user.filter(item => item.userId !== targetUserId));
     };
 
     const startEdit = (item) => {
-    setEditId(item.id);
+      setEditUserId(item.userId);
     // pre fill out form with the selected user's data on edit so they dont have to do extra work
     setFormData({
       firstName: item.firstName,
@@ -127,27 +147,30 @@ const [formData, setFormData] = useState({
           {errors.email && <p style={{ color: "red"}}>{errors.birthday}</p>}
           </div>
           
-          <input type="hidden" id="submissionTime" name="submissionTime"></input>
+          <input type="hidden" id="submittedAt" name="submittedAt"></input>
 
           <button className="button1" type="submit">
-            {editId ? "Update User" : "Add User"}
+            {editUserId ? "Update User" : "Add User"}
           </button>
         </form>
         
       )}
       
-      <ul>
+      <div>
         {user.map((item) => (
-          <ul key={item.id}>
+          <ul key={item.userId}>
             <p>{item.firstName}</p>
             <p>{item.lastName}</p>
             <p>{item.username}</p>
             <p>{item.email}</p>
-            <button className="button1" onClick={() => startEdit(item)}>Edit</button>
-            <button className="button1" onClick={() => deleteItem(item)}>Delete</button>
+            <p>{item.birthday}</p>
+            <button className="button1" onClick={() => 
+              startEdit(item)}
+              >Edit</button>
+            <button className="button1" onClick={() => deleteItem(item.userId)}>Delete</button>
           </ul>
         ))}
-      </ul>
+      </div>
       
     </div> 
 
@@ -155,7 +178,6 @@ const [formData, setFormData] = useState({
   ); 
 
 }
-    
-    
+  
     
 export default CreateUserForm;

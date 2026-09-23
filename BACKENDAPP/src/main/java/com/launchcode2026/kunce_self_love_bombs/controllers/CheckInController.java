@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("check-in")
+@CrossOrigin ("http://localhost:5173/")
 public class CheckInController {
     @Autowired
     private UserRepository userRepository;
