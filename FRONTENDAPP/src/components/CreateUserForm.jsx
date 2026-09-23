@@ -63,8 +63,14 @@ const [formData, setFormData] = useState({
             const savedUser = await response.json();
             setUser([...user, savedUser]);
             console.log("User added successfully. Thank you.", savedUser);
-              //resetting the form back to empty strings after submission
-            
+            setFormData({ 
+              firstName: "", 
+              lastName: "", 
+              username: "", 
+              email: "",
+              birthday: "" //resetting the form back to empty strings after submission
+            })
+
             setErrors({});
             }} catch (error) {
               console.error('Oh no. Error adding user:', error)

@@ -45,17 +45,11 @@ public class UserController {
 
     @PostMapping("/create-form")
     public ResponseEntity<User> createUser (@RequestBody User user){
-        return ResponseEntity.ok(userRepository.save(user));
-    }
+        return ResponseEntity.ok(userRepository.save(user));}
 
-//    String handleForm (User user) {
-//        System.out.println(user);
-//        userRepository.save(user);
-//        System.out.println(user);
-//        return "Thank you for adding " + user.getFirstName() + " " + user.getLastName() + " to the Self Love Bombs database!";
-//    }
-//
-
+    @GetMapping("{lastName}")
+    public Optional<User> findByLastName(@PathVariable("lastName") String lastName) {
+        return userRepository.findByLastName (lastName);
 
     //this one i dont even know how to search it - i'm searching by just the data so like becca or 3 for id or first name?
 //    @GetMapping("/{id}")
@@ -68,10 +62,8 @@ public class UserController {
 //        return userRepository.findByFirstName(firstName);
 //    }
 //
-//    @GetMapping("{lastName}")
-//    public Optional<User> findByLastName(@PathVariable String lastName) {
-//        return userRepository.findByLastName (lastName);
-//    }
+
+    }
 
 
     //returns null in postman. should this be connected to the user repository with the test? No right because there isnt a form yet....
