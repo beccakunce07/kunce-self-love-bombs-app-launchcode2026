@@ -28,16 +28,6 @@ public class UserController {
 //    @Autowired
 //    private CheckInRepository checkInRepository;
 
-    @GetMapping
-    public String user(){
-        return "Welcome to the user home page";
-    }
-
-    @GetMapping("/home")
-    public String home() {
-        return "Hello World";
-    }
-
     @GetMapping("/find-all")
     public List<User> findAll() {
         return userRepository.findAll();
@@ -47,9 +37,19 @@ public class UserController {
     public ResponseEntity<User> createUser (@RequestBody User user){
         return ResponseEntity.ok(userRepository.save(user));}
 
-    @GetMapping("{lastName}")
-    public Optional<User> findByLastName(@PathVariable("lastName") String lastName) {
-        return userRepository.findByLastName (lastName);
+    @GetMapping("find-by-last-name-{lastName}")
+    public List<User> findByLastName(@PathVariable("lastName") String lastName) {
+        return userRepository.findByLastNameIgnoreCase (lastName);}
+
+    @GetMapping("find-by-first-name-{firstName}")
+    public List<User> findByFirstName(@PathVariable("firstName") String firstName) {
+        return userRepository.findByFirstNameIgnoreCase (firstName);}
+
+    @GetMapping("find-by-username-{userName}")
+    public List<User> findByUsername(@PathVariable("username") String username) {
+        return userRepository.findByUsernameIgnoreCase(username);}
+
+
 
     //this one i dont even know how to search it - i'm searching by just the data so like becca or 3 for id or first name?
 //    @GetMapping("/{id}")
@@ -68,6 +68,6 @@ public class UserController {
 
     //returns null in postman. should this be connected to the user repository with the test? No right because there isnt a form yet....
 
-}
+
 
 
