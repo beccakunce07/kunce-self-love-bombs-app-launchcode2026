@@ -2,7 +2,10 @@ package com.launchcode2026.kunce_self_love_bombs.models;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class LoveBomb {
@@ -12,7 +15,7 @@ public class LoveBomb {
 
     private String message;
     private String categoryKey;
-    private LocalDateTime timeSubmitted;
+    private Instant timeSubmitted;
 
 //    @ManyToMany
 //    @JoinTable(
@@ -26,6 +29,9 @@ public class LoveBomb {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToMany (mappedBy = "loveBombs", fetch = FetchType.LAZY)
+    private List<CheckIn> checkIns = new ArrayList<>();
+
     public User getUser() {
         return user;
     }
@@ -36,7 +42,7 @@ public class LoveBomb {
 
     public LoveBomb(){}
 
-    public LoveBomb(String message, String categoryKey, LocalDateTime timeSubmitted){
+    public LoveBomb(String message, String categoryKey, Instant timeSubmitted){
         this.message = message;
         this.categoryKey = categoryKey;
         this.timeSubmitted = timeSubmitted;
@@ -66,14 +72,19 @@ public class LoveBomb {
         this.categoryKey = categoryKey;
     }
 
-    public LocalDateTime getTimeSubmitted() {
+    public Instant getTimeSubmitted() {
         return timeSubmitted;
     }
 
-    public void setTimeSubmitted(LocalDateTime timeSubmitted) {
+    public void setTimeSubmitted(Instant timeSubmitted) {
         this.timeSubmitted = timeSubmitted;
     }
 
+    public List<CheckIn> getCheckIns() {
+        return checkIns;
+    }
 
-
+    public void setCheckIns(List<CheckIn> checkIns) {
+        this.checkIns = checkIns;
+    }
 }

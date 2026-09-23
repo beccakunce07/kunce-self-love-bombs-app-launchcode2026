@@ -51,7 +51,7 @@ public class UserController {
         return userRepository.findByUsernameIgnoreCase(username);}
 
     @GetMapping("find-by-userId-{userId}")
-    public List<User> findByUserId(@PathVariable("userId") int userId) {
+    public User findByUserId(@PathVariable("userId") int userId) {
         return userRepository.findByUserId(userId);}
 
 

@@ -3,7 +3,8 @@ package com.launchcode2026.kunce_self_love_bombs.models;
 import jakarta.persistence.*;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class CheckIn {
@@ -12,7 +13,7 @@ public class CheckIn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int checkInId;
 
-    private String checkInKey;
+    private String categoryKey;
     private String feeling;
     private Instant recordedAt;
 
@@ -20,10 +21,19 @@ public class CheckIn {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToMany (fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "checkin_lovebomb",
+            joinColumns = @JoinColumn(name = "check_in_id"),
+            inverseJoinColumns = @JoinColumn(name = "love_bomb_id")
+    )
+    private List<LoveBomb> loveBombs = new ArrayList<>();
+
+
     public CheckIn(){}
 
-    public CheckIn(String checkInKey, String feeling, Instant recordedAt){
-        this.checkInKey = checkInKey;
+    public CheckIn(String categoryKey, String feeling, Instant recordedAt){
+        this.categoryKey = categoryKey;
         this.feeling = feeling;
         this.recordedAt = recordedAt;
     }
@@ -44,12 +54,20 @@ public class CheckIn {
         this.checkInId = checkInId;
     }
 
-    public String getCheckInKey() {
-        return checkInKey;
+    public String getCategoryKey() {
+        return categoryKey;
     }
 
-    public void setCheckInKey(String checkInKey) {
-        this.checkInKey = checkInKey;
+    public void setCategoryKey(String categoryKey) {
+        this.categoryKey = categoryKey;
+    }
+
+    public List<LoveBomb> getLoveBombs() {
+        return loveBombs;
+    }
+
+    public void setLoveBombs(List<LoveBomb> loveBombs) {
+        this.loveBombs = loveBombs;
     }
 
     public String getFeeling() {
