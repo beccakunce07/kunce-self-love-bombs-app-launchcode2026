@@ -22,7 +22,6 @@ const [formData, setFormData] = useState({
   };
 
   //these prevent emptyt submissions from being entered.
-
   const validate = () => {
     let newErrors = {};
     if (!formData.firstName.trim()) newErrors.firstName = "Whoops. First name is required.";

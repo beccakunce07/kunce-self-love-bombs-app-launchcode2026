@@ -9,11 +9,12 @@ function CheckInPage () {
   const [categoryKey, setCategoryKey] = useState("");
   const [feeling, setFeeling] = useState("");
   const [checkInList, setCheckInList] = useState ([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const validate = () => {
     let newErrors = {};
-    if (!feeling && !categoryKey) newErrors = "oops. please check-in with both a feeling and a category";
-
+    if (!feeling) newErrors.feeling = "oops. please select a feeling.";
+    if (!categoryKey) newErrors.categoryKey = "oops. please select a category.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0
   };
@@ -39,25 +40,30 @@ function CheckInPage () {
               const savedCheckIn = await response.json();
               setCheckInList([...checkInList, savedCheckIn]);
               console.log("Check-in added successfully. Thank you.", savedCheckIn);
-            }
-
-         
-
+                          
+            setIsSubmitted(true);
+            setFeeling(""); //resetting form after successful save
+            setCategoryKey("");
             setErrors({});
-          } catch (error){
+          }
+          else {
+            console.error("Dang! Server error - could not save your check-in.");
+            setErrors({submit: "Dang! Server error - could not save your check-in."})
+            }
+          } catch (error) {
             console.error('Oh dear. There was an error saving your check-in', error)
           }
     }
-  }
-
+  };
 
   return (
     <>
     <PageHeader title = "Let's Check In"/>
-    {/* <div className="page-wrapper"> */}
+    <div className="page-wrapper">
       <form className='content-card' onSubmit = {handleCheckInSubmit}>
-      <h2> Today I am feeling...</h2>
+      <h2> Today I am feeling...{feeling.toLocaleLowerCase()}</h2>
 
+      {errors.submit && <p className="error">{errors.submit}</p>}
       {errors.feeling && <p className="error">{errors.feeling}</p>}
       {errors.categoryKey && <p className="error">{errors.categoryKey}</p>}
 
@@ -70,9 +76,8 @@ function CheckInPage () {
       <button type = "button" className = "button1" onClick={() => setFeeling("excited")}>Excited</button>
       <button type = "button" className = "button1" onClick={() => setFeeling("neutral")}>Neutral</button>
       </div>
-      <p>Today I am feeling {feeling.toLocaleLowerCase()}</p>
 
-      <h3> About my...</h3>
+      <h3> About my...{categoryKey.toLocaleLowerCase()}</h3>
       
       <div className = "button-container">
       <button type = "button" className = "button2" onClick={() => setCategoryKey("finances")}>Finances</button>
@@ -82,19 +87,15 @@ function CheckInPage () {
       <button type = "button" className = "button2" onClick={() => setCategoryKey("life in general")}>Life in general</button>
       <button type = "button" className = "button2" onClick={() => setCategoryKey("something else")}>Something Else</button>
       </div>
-      
-      <p>About my {categoryKey}.</p>   
-      
-      <SpecificSlbButton category = {categoryKey}/>
-      <button type = "submit" className = "button">Log Check-In</button>
-
-    
+          
+      <SpecificSlbButton categoryKey = {categoryKey}/>
+      <button type = "submit" className = "button1">Log Check-In</button>
       </form>
-      {/* </div> */}
+      </div>
   
 </>
   
-  )
+  );
 }
 
 

@@ -2,11 +2,11 @@ import { useState } from "react";
 import SlbBank from "./SlbBank.jsx";
 
 
-function SpecificSlbButton ({key}) {
+function SpecificSlbButton ({categoryKey}) {
   const [message, setMessage] = useState ("");
 
   const handleClick = () => {
-    const filteredArray = SlbBank.filter((index) => index.key.trim().toLowerCase() === key.trim().toLowerCase());
+    const filteredArray = SlbBank.filter((index) => index.categoryKey.trim().toLowerCase() === categoryKey.trim().toLowerCase());
     const randomIndex = Math.floor(Math.random() * filteredArray.length);
 
     if (filteredArray.length === 0) {

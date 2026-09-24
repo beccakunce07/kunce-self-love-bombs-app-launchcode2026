@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 function CYOForm() {
 
+  const userId = user ? user.userId || user.id : null;
+
   const [messageList, setMessageList] = useState([]);
   const [editMessageId, setEditMessageId] = useState(null);
   const [showForm, setShowForm] = useState(false);
@@ -41,7 +43,7 @@ function CYOForm() {
     if (!validate()) return; //if fails validation check just ends instead of going through everything else
 
       if (editMessageId) {
-        setMessageList(messageList.map(item => item.messageId === editMessageId ? {...item, ...formData}, timeSubmitted: new Date().toISOString : item));
+        setMessageList(messageList.map(item => item.messageId === editMessageId ? {...item, ...formData, timeSubmitted: new Date().toISOString } : item));
         setEditMessageId(null);
         setFormData({message: "", categoryKey: ""});
         setShowForm(false);
@@ -58,19 +60,20 @@ function CYOForm() {
           })
         });
 
-    
-
         if (response.ok){
           const savedMessage = await response.json();
           setMessageList([...messageList, savedMessage]);
           console.log("Love Bomb added successfully. Thank you.", savedMessage);
+          return <p>Your love bomb was added succesfully. Thank you</p>        
         }
+
         setFormData({ message: "", categoryKey: "" });
         setShowForm(false);
         setErrors({});
         } catch (error) {
           console.error('Oh no. Error adding love Bomb.', error)
           setErrors({ submit: "Failed to save message. Please try again." });
+          return <p>Failed to save message. Please try again.</p>
         }
     
   }
@@ -123,7 +126,7 @@ const startEdit = (item) => {
           value = {formData.categoryKey}
           onChange={handleChange}>
           
-            <option value="⟢⟢">finances</option>
+            <option value = "">⟢Choose Category⟢</option>
             <option value="Finances">finances</option>
             <option value="Body">body</option>
             <option value="Relationship">relationship</option>
