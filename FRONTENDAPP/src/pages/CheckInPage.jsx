@@ -166,11 +166,21 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
               {checkInList.map((item) => (
                 <li key={item.checkInId} className="content-card" >
                   <div>
-                    <strong>Feeling</strong> {item.feeling} | <strong>Category:</strong> {item.categoryKey}
+                    <h3> I am feeling {item.feeling} about my {item.categoryKey}</h3>
+                    <p> This check in was logged on { //creating a more user friendly way to display the recorded at than the instant data type
+                    item.recordedAt ? new Date(item.recordedAt).toLocaleDateString(undefined, {
+                      weekday: 'short', month: 'short',
+                      day: 'numeric'
+                    }) 
+                    : 'At'} at {item.recordedAt ? new Date(item.recordedAt).toLocaleTimeString(undefined, {
+                      hour: '2-digit',
+                      minute: '2-digit'
+                      }) : ''}
+                      </p>
                   </div>
                   <div>
-                    <button type="button" className="button" onClick={() => startEdit(item)} >Edit Check-In</button> 
-                    <button type="button" className="button" onClick={() => deleteCheckIn(item.checkInId)}>Delete Check-In</button>
+                    <button type="button" className="button3" onClick={() => startEdit(item)} >Edit Check-In</button> 
+                    <button type="button" className="button3" onClick={() => deleteCheckIn(item.checkInId)}>Delete Check-In</button>
                   </div>
                   </li>
               ))}
