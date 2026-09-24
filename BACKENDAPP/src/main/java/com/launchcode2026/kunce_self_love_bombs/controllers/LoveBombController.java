@@ -5,7 +5,6 @@ import com.launchcode2026.kunce_self_love_bombs.models.User;
 import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/love-bomb")
-@CrossOrigin (origins = "http://localhost:5173")
+@CrossOrigin ("http://localhost:5173")
 
 public class LoveBombController {
 
@@ -27,7 +26,6 @@ public class LoveBombController {
     @Autowired
     private CheckInRepository checkInRepository;
 
-    //this one is working!!
     @GetMapping("/find-all")
     public List<LoveBomb> findAll() {
         return loveBombRepository.findAll();
@@ -35,13 +33,12 @@ public class LoveBombController {
 
 
     @PostMapping("/user/{userId}")
-    public ResponseEntity<?> createLoveBomb (@PathVariable("userId") int userId, @RequestBody LoveBomb loveBomb){
+    public ResponseEntity<?> createLoveBombWithUserId(@PathVariable("userId") int userId, @RequestBody LoveBomb loveBomb){
         User user = userRepository.findByUserId(userId);
         if (user == null) {
             return ResponseEntity.status(404).body("oops. No user found with id: " + userId);
         }
         loveBomb.setUser(user);
-
         LoveBomb savedLoveBomb = loveBombRepository.save(loveBomb);
 
         return ResponseEntity.ok(savedLoveBomb);

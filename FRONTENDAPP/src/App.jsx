@@ -22,11 +22,11 @@ function App() {
      <div className = "app-wrapper">
       <NavBar />
       <Routes>
-      <Route path = '/AboutPage' element ={<AboutPage setCurrentUser={setCurrentUser}></AboutPage>}></Route>
+      <Route path = '/AboutPage' element ={<AboutPage ></AboutPage>}></Route>
       <Route path = '/' element ={<HomePage></HomePage>}></Route>
       <Route path = '/CreateUserPage' element ={<CreateUserPage setCurrentUser={setCurrentUser}></CreateUserPage>}></Route>
-      <Route path = '/CheckInPage' element ={<CheckInPage user={currentUser}></CheckInPage>}></Route>
-      <Route path = '/CreateYourOwnPage' element ={<CreateYourOwnPage user={currentUser}></CreateYourOwnPage>}></Route>
+      <Route path = '/CheckInPage' element ={<CheckInPage user = {currentUser}></CheckInPage>}></Route>
+      <Route path = '/CreateYourOwnPage' element ={<CreateYourOwnPage user = {currentUser}></CreateYourOwnPage>}></Route>
       <Route path = '/PetLoveBombPage' element ={<PetLoveBombPage></PetLoveBombPage>}></Route>            
       </Routes>
       <PageFooter></PageFooter>

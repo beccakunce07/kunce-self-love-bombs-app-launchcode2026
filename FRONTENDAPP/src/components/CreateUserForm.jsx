@@ -12,7 +12,7 @@ const [formData, setFormData] = useState({
   });
   //creating our useState variables
   const [errors, setErrors] = useState({});
-  const [user, setUser] = useState([]);
+  const [userList, setUserList] = useState([]);
   const [editUserId, setEditUserId] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
@@ -31,7 +31,7 @@ const [formData, setFormData] = useState({
     if (!formData.birthday.trim()) newErrors.birthday = "Oahr naorhhh. Birthday is required. "
     
     // Validation -- checks if the email entered does not include '@'
-    if (!formData.email.includes("@")) {
+    if (formData.email.trim() && !formData.email.includes("@")) {
       newErrors.email = "Please enter a valid email address containing '@'.";
     }
     
@@ -46,22 +46,34 @@ const [formData, setFormData] = useState({
     if (validate()) {
       if (editUserId) {
         // Edit user
-        setUser(user.map(item => item.userId === editUserId ? { ...item, ...formData } : item));
+        setUserList(userList.map(item => item.userId === editUserId ? { ...item, ...formData } : item));
         setEditUserId(null);
       } else {
         // Add new user
         const addUser = async() => { //a cute lil anon function to get us through the fetching phase
           try{
-            const response = await fetch ('http://localhost:8080/user/create-form', {
+             const userPayload = {
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              username: formData.username,
+              email: formData.email,
+              // If your Java field is a LocalDate, an ISO string "YYYY-MM-DD" works, 
+              // but ensure it's not being modified into an invalid format here.
+              birthday: formData.birthday 
+            };
+    
+              
+            const response = await fetch (`http://localhost:8080/user/create-form`, {
               method: 'POST',
               headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify(formData)
+              body: JSON.stringify(userPayload)
             })
 
             if (response.ok){
             const savedUser = await response.json();
             setCurrentUser(savedUser);
             localStorage.setItem('love_bomb_user', JSON.stringify(savedUser))
+            setUserList([...userList, savedUser]);
             setFormData({ 
               firstName: "", 
               lastName: "", 
@@ -87,7 +99,7 @@ const [formData, setFormData] = useState({
     
     //delete user 
     const deleteItem = (targetUserId) => {
-        setUser(user.filter(item => item.userId !== targetUserId));
+        setUserList(userList.filter(item => item.userId !== targetUserId));
     };
 
     const startEdit = (item) => {
@@ -168,17 +180,15 @@ const [formData, setFormData] = useState({
       )}
       
       <div>
-        {user.map((item) => (
+        {userList.map((item) => (
           <ul key={item.userId}>
             <p>{item.firstName}</p>
             <p>{item.lastName}</p>
             <p>{item.username}</p>
             <p>{item.email}</p>
             <p>{item.birthday}</p>
-            <button className="button1" onClick={() => 
-              startEdit(item)}
-              >Edit</button>
-            <button className="button1" onClick={() => deleteItem(item.userId)}>Delete</button>
+            <button className="button1" onClick={() => startEdit(item)}>Edit</button>
+            <button className="button1" onClick={() => deleteItem(item.userId || item.id)}>Delete</button>
           </ul>
         ))}
       </div>

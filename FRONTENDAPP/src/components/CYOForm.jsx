@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function CYOForm(user) {
+function CYOForm({user}) {
 
   const userId = user ? user.userId || user.id : null;
 
@@ -75,15 +75,10 @@ function CYOForm(user) {
           setErrors({ submit: "Failed to save message. Please try again." });
           return <p>Failed to save message. Please try again.</p>
         }
-    
   }
-
     addLoveBomb();
   }
-}
-    
-  ;
-
+};
   const deleteItem = (messageId) => {
     setMessageList(messageList.filter(item => item.messageId !== messageId));
   };

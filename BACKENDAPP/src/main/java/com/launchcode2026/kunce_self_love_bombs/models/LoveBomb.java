@@ -15,8 +15,6 @@ public class LoveBomb {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int loveBombId;
 
-    private int userId;
-
     private String message;
 
     @JsonProperty("categoryKey")
@@ -25,7 +23,7 @@ public class LoveBomb {
     private Instant timeSubmitted;
 
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @JoinColumn(name = "userId")
     @JsonIgnore //Hopefully this stops the loop going from check in to lovebomb and vice versa
     private User user;
 
@@ -36,12 +34,16 @@ public class LoveBomb {
     public LoveBomb(){}
 
     public int getUserId() {
-        return userId;
+        return this.user != null ? this.user.getUserId() : 0;
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        if (this.user == null) {
+            this.user = new User();
+        }
+        this.user.setUserId(userId);
     }
+
 
     public User getUser() {
         return user;

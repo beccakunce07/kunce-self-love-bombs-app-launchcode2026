@@ -1,7 +1,9 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,22 +17,23 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
     private String firstName;
     private String lastName;
     private String username;
     private String email;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonProperty("birthday")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") // 👈 Add this helper!
     private LocalDate birthday;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<LoveBomb> loveBombs = new ArrayList<>();
 
-    @OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties ("user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
     private List<CheckIn> checkIns = new ArrayList<>();
 
     public User() {
@@ -92,20 +95,19 @@ public class User {
         this.birthday = birthday;
     }
 
-    public List<LoveBomb> getLoveBomb () {
+    public List<LoveBomb> getLoveBombs() {
         return loveBombs;
     }
 
-    public void setLoveBombs(LoveBomb loveBomb){
-        this.loveBombs.add(loveBomb);
+    public void setLoveBombs(List<LoveBomb> loveBombs) {
+        this.loveBombs = loveBombs;
     }
 
-    public List<CheckIn> getCheckIns(){
+    public List<CheckIn> getCheckIns() {
         return checkIns;
     }
 
-    public void setCheckIns(CheckIn checkIn){
-        this.checkIns.add(checkIn);
+    public void setCheckIns(List<CheckIn> checkIns) {
+        this.checkIns = checkIns;
     }
-
 }
