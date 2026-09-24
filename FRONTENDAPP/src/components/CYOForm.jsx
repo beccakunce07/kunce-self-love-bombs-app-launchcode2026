@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function CYOForm() {
+function CYOForm(user) {
 
   const userId = user ? user.userId || user.id : null;
 

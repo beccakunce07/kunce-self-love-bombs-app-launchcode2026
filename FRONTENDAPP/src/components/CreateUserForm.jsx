@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function CreateUserForm() {
+function CreateUserForm({setCurrentUser}) {
 
     //Setting the form data to empty string s
 const [formData, setFormData] = useState({
@@ -60,8 +60,8 @@ const [formData, setFormData] = useState({
 
             if (response.ok){
             const savedUser = await response.json();
-            setUser([...user, savedUser]);
-            console.log("User added successfully. Thank you.", savedUser);
+            setCurrentUser(savedUser);
+            localStorage.setItem('love_bomb_user', JSON.stringify(savedUser))
             setFormData({ 
               firstName: "", 
               lastName: "", 
@@ -69,6 +69,8 @@ const [formData, setFormData] = useState({
               email: "",
               birthday: "" //resetting the form back to empty strings after submission
             })
+            console.log("User added successfully. Thank you.", savedUser);
+            <p>User added successfully. Thank you.</p>
 
             setErrors({});
             }} catch (error) {
@@ -111,7 +113,7 @@ const [formData, setFormData] = useState({
         <form className="form" onSubmit={handleUserSubmit}>
           <div className = "form-group">
             <label htmlFor="firstName">First Name:</label>
-          <input
+          <input id = "firstName"
             name = "firstName" 
             value={formData.firstName} 
             onChange={handleChange} 
@@ -120,6 +122,7 @@ const [formData, setFormData] = useState({
           
           <label htmlFor="lastName">Last Name:</label>
           <input 
+            id = "lastName"
             name = "lastName" 
             value={formData.lastName} 
             onChange={handleChange} 
@@ -128,6 +131,7 @@ const [formData, setFormData] = useState({
           
           <label htmlFor="username">Username:</label>
           <input 
+            id = "username"
             name = "username" 
             value={formData.username} 
             onChange={handleChange}  
@@ -136,6 +140,7 @@ const [formData, setFormData] = useState({
                 
           <label htmlFor="email">Email:</label>
           <input 
+            id = "email"
             name = "email" 
             value={formData.email} 
             onChange={handleChange} 
@@ -144,6 +149,7 @@ const [formData, setFormData] = useState({
 
           <label htmlFor="birthday">Birthday:</label>
           <input 
+            id = "birthday"
             name = "birthday" 
             placeholder="YYYY-MM-DD"
             value={formData.birthday} 

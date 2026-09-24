@@ -1,5 +1,6 @@
 package com.launchcode2026.kunce_self_love_bombs.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -19,24 +20,23 @@ public class CheckIn {
     private Instant recordedAt;
 
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties
+    @JoinColumn(name = "userId")
+    @JsonIgnore
     private User user;
 
     @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable(
-            name = "checkin_lovebomb",
-            joinColumns = @JoinColumn(name = "check_in_id"),
-            inverseJoinColumns = @JoinColumn(name = "love_bomb_id")
+            name = "checkIn_loveBomb",
+            joinColumns = @JoinColumn(name = "checkInId"),
+            inverseJoinColumns = @JoinColumn(name = "loveBombId")
     )
     @JsonIgnoreProperties //doing this so it doesnt get caught in an infinite loop sice check ins live in both user and love bomb
     private List<LoveBomb> loveBombs = new ArrayList<>();
 
-
-
     public CheckIn(){}
 
-    public CheckIn(String categoryKey, String feeling, Instant recordedAt){
+    public CheckIn(User user, String categoryKey, String feeling, Instant recordedAt){
+        this.user = user;
         this.categoryKey = categoryKey;
         this.feeling = feeling;
         this.recordedAt = recordedAt;
@@ -50,6 +50,16 @@ public class CheckIn {
         this.user = user;
     }
 
+    public int getUserId() {
+        return this.user != null ? this.user.getUserId() : 0;
+    }
+
+    public void setUserId(int userId) {
+        if (this.user == null) {
+            this.user = new User();
+        }
+        this.user.setUserId(userId);
+    }
     public int getCheckInId() {
         return checkInId;
     }

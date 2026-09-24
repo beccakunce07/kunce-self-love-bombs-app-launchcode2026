@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import SpecificSlbButton from '../components/SpecificSlbButton';
 import PageHeader from '../components/PageHeader';
 
-function CheckInPage () {
+function CheckInPage ({user}) { //attempting to pass the user as a prop in CheckInPage
+
+  const userId = user ? user.userId || user.id : null;
   
   const [errors, setErrors] = useState({});
   const [categoryKey, setCategoryKey] = useState("");
@@ -18,19 +20,21 @@ function CheckInPage () {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0
   };
+  
 
   const handleCheckInSubmit = async (e) => {
     e.preventDefault();
 
   if(validate()){
     const checkInData = {
+      userId : userId,
       categoryKey : categoryKey,
       feeling : feeling,
       recordedAt : new Date().toISOString()
     };
 
       try {
-        const response = await fetch ('http://localhost:8080/check-in/create-check-in', {
+        const response = await fetch (`http://localhost:8080/check-in/user/${userId}`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(checkInData)
@@ -40,6 +44,7 @@ function CheckInPage () {
               const savedCheckIn = await response.json();
               setCheckInList([...checkInList, savedCheckIn]);
               console.log("Check-in added successfully. Thank you.", savedCheckIn);
+              <p>"Check-in added successfully. Thank you."</p>
                           
             setIsSubmitted(true);
             setFeeling(""); //resetting form after successful save
@@ -49,6 +54,7 @@ function CheckInPage () {
           else {
             console.error("Dang! Server error - could not save your check-in.");
             setErrors({submit: "Dang! Server error - could not save your check-in."})
+      
             }
           } catch (error) {
             console.error('Oh dear. There was an error saving your check-in', error)
@@ -61,7 +67,11 @@ function CheckInPage () {
     <PageHeader title = "Let's Check In"/>
     <div className="page-wrapper">
       <form className='content-card' onSubmit = {handleCheckInSubmit}>
-      <h2> Today I am feeling...{feeling.toLocaleLowerCase()}</h2>
+        {isSubmitted && (
+          <h1>✨Thank you for checking in! Your entry has been logged!✨</h1>
+
+          )}
+      <h2> Today I am feeling...{feeling.toLowerCase()}</h2>
 
       {errors.submit && <p className="error">{errors.submit}</p>}
       {errors.feeling && <p className="error">{errors.feeling}</p>}
@@ -77,7 +87,7 @@ function CheckInPage () {
       <button type = "button" className = "button1" onClick={() => setFeeling("neutral")}>Neutral</button>
       </div>
 
-      <h3> About my...{categoryKey.toLocaleLowerCase()}</h3>
+      <h3> About my...{categoryKey.toLowerCase()}</h3>
       
       <div className = "button-container">
       <button type = "button" className = "button2" onClick={() => setCategoryKey("finances")}>Finances</button>

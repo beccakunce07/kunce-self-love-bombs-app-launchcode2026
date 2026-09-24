@@ -6,13 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="7a5cb6e0-b74a-48e7-a2c3-36128d180c02" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/CheckInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/CheckInController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/CheckIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/CheckIn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/LoveBomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/LoveBomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/components/CYOForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/components/CYOForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/READMEBACK.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/READMEFRONT.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/components/CreateUserForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/components/CreateUserForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/pages/CheckInPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/pages/CheckInPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/pages/CreateUserPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/pages/CreateUserPage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,20 +31,25 @@
     <option name="cachedIndexableFilesCount" value="25" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="tryingauth" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "beccakunce07"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;beccakunce07&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/beccakunce07/kunce-self-love-bombs-app-launchcode2026.git",
-    "accountId": "69012b3a-c444-4bac-a960-7d414cc7bc29"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/beccakunce07/kunce-self-love-bombs-app-launchcode2026.git&quot;,
+    &quot;accountId&quot;: &quot;69012b3a-c444-4bac-a960-7d414cc7bc29&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -53,41 +61,41 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3JhCLGEA6o2InDqAfGG7pPciXMK" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.KunceSelfLoveBombsApplication.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.KunceSelfLoveBombsApplication.executor": "Run",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "beccanew",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/beccakunce/Desktop/LaunchCode/Coursework/Unit-2/unit-2-self-love-bombs-appBK/kunce-self-love-bombs-app-launchcode2026",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.KunceSelfLoveBombsApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.KunceSelfLoveBombsApplication.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;beccatrying&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/beccakunce/Desktop/LaunchCode/Coursework/Unit-2/unit-2-self-love-bombs-appBK/kunce-self-love-bombs-app-launchcode2026&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="7a5cb6e0-b74a-48e7-a2c3-36128d180c02" name="Changes" comment="" />

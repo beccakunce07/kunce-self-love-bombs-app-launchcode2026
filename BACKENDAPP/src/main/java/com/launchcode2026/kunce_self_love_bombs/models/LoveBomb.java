@@ -15,6 +15,8 @@ public class LoveBomb {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int loveBombId;
 
+    private int userId;
+
     private String message;
 
     @JsonProperty("categoryKey")
@@ -22,16 +24,24 @@ public class LoveBomb {
 
     private Instant timeSubmitted;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore // This breaks the infinite backend JSON loop
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @JsonIgnore //Hopefully this stops the loop going from check in to lovebomb and vice versa
     private User user;
 
-    @ManyToMany(mappedBy = "loveBombs", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<CheckIn> checkIns = new ArrayList<>();
+//    @ManyToMany(mappedBy = "loveBombs", fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private List<CheckIn> checkIns = new ArrayList<>();
 
     public LoveBomb(){}
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public User getUser() {
         return user;
@@ -73,11 +83,11 @@ public class LoveBomb {
         this.timeSubmitted = timeSubmitted;
     }
 
-    public List<CheckIn> getCheckIns() {
-        return checkIns;
-    }
-
-    public void setCheckIns(List<CheckIn> checkIns) {
-        this.checkIns = checkIns;
-    }
+//    public List<CheckIn> getCheckIns() {
+//        return checkIns;
+//    }
+//
+//    public void setCheckIns(List<CheckIn> checkIns) {
+//        this.checkIns = checkIns;
+//    }
 }
