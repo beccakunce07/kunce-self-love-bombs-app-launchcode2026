@@ -6,6 +6,7 @@ import com.launchcode2026.kunce_self_love_bombs.repositories.CheckInRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.LoveBombRepository;
 import com.launchcode2026.kunce_self_love_bombs.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 //add this back in if there is time with birthday and time submitted
@@ -69,13 +70,15 @@ public class LoveBombController {
         }
         return ResponseEntity.ok(loveBombs);
     }
+
+    @DeleteMapping("/delete/{checkInId}")
+    public ResponseEntity<?> deleteLoveBomb(@PathVariable("loveBombId") int loveBombId) {
+        if (!checkInRepository.existsById(loveBombId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Check-in not found.");
+        }
+        checkInRepository.deleteById(loveBombId);
+        return ResponseEntity.ok("Check-in deleted successfully.");
+    }
     //this will (hopefully) use the CYO form on the front endd
 
-    @PostMapping("CYO-form")
-    public String handleForm(@RequestBody LoveBomb loveBomb){
-        System.out.println(loveBomb.getMessage());
-        loveBombRepository.save(loveBomb);
-        System.out.println(loveBomb);
-        return "Hello, here is your Love Bomb: " + loveBomb.getMessage() + " regarding " + loveBomb.getCategoryKey() + ". This was submitted at " + loveBomb.getTimeSubmitted();
-    }
 }
