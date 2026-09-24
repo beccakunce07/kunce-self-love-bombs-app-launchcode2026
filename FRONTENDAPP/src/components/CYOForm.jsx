@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function CYOForm() {
-  const userId = 1;
 
   const [messageList, setMessageList] = useState([]);
   const [editMessageId, setEditMessageId] = useState(null);
@@ -23,21 +22,26 @@ function CYOForm() {
     let newErrors = {};
     if (!formData.message || !formData.message.trim()) newErrors.message = "Whoops. message is required.";
     if (!formData.categoryKey) newErrors.categoryKey = "uh oh. please add a category this relates to."
-    // if (!formData.userId) newErrors.userId = 
-  
+    
 
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
-};
+    if (!userId) {
+      console.error("Cannot submit form: userId is missing or undefined.");
+      newErrors.submit = "You must be logged in to save a message.";
+
+        }
+        
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+    };
 
   const handleMessageSubmit = (m) => {
     m.preventDefault();
 
 
-    if (!validate()) return;
+    if (!validate()) return; //if fails validation check just ends instead of going through everything else
 
       if (editMessageId) {
-        setMessageList(messageList.map(item => item.messageId === editMessageId ? {...item, ...formData} : item));
+        setMessageList(messageList.map(item => item.messageId === editMessageId ? {...item, ...formData}, timeSubmitted: new Date().toISOString : item));
         setEditMessageId(null);
         setFormData({message: "", categoryKey: ""});
         setShowForm(false);
@@ -49,15 +53,12 @@ function CYOForm() {
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
             message: formData.message,
-            categoryKey: formData.categoryKey
+            categoryKey: formData.categoryKey,
+            timeSubmitted: new Date().toISOString()
           })
         });
 
-        if (!userId) {
-          console.error("Cannot submit form: userId is missing or undefined.");
-          setErrors({ submit: "You must be logged in to save a message." });
-          return;
-        }
+    
 
         if (response.ok){
           const savedMessage = await response.json();
@@ -122,6 +123,7 @@ const startEdit = (item) => {
           value = {formData.categoryKey}
           onChange={handleChange}>
           
+            <option value="⟢⟢">finances</option>
             <option value="Finances">finances</option>
             <option value="Body">body</option>
             <option value="Relationship">relationship</option>
@@ -133,7 +135,7 @@ const startEdit = (item) => {
           </div>
           <input type="hidden" id="timeSubmitted" name="timeSubmitted"></input>
 
-          <button className="button1" type="submit">
+          <button className="button2" type="submit">
             {editMessageId ? "Update Bank" : "Add to Bank"}
           </button>
         </form>
