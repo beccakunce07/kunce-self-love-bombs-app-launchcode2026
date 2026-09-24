@@ -12,15 +12,40 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
   const [feeling, setFeeling] = useState("");
   const [checkInList, setCheckInList] = useState ([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [editCheckInId, setEditCheckInId] = useState(null);
 
-  const validate = () => {
+    const validate = () => {
     let newErrors = {};
     if (!feeling) newErrors.feeling = "oops. please select a feeling.";
     if (!categoryKey) newErrors.categoryKey = "oops. please select a category.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0
   };
-  
+
+  const deleteCheckIn = async (idToDelete) => {
+    try {
+      const response = await fetch(`http://localhost:8080/check-in/delete/${idToDelete}`, {
+        method: 'DELETE'
+      });
+      if (response.ok) {
+        // Remove item from state array visually once backend confirms success
+        setCheckInList(checkInList.filter(item => item.checkInId !== idToDelete));
+        console.log("Check-in entry removed from database successfully.");
+      } else {
+        console.error("Failed to delete entry from backend database.");
+      }
+    } catch (error) {
+      console.error("Network error during deletion:", error);
+    }
+  };
+
+    const startEdit = (item) => {
+    setEditCheckInId(item.checkInId);
+    setFeeling(item.feeling);
+    setCategoryKey(item.categoryKey);
+    setIsSubmitted(false);
+  };
+
 
   const handleCheckInSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +58,28 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
       recordedAt : new Date().toISOString()
     };
 
-      try {
+     try {
+      if (editCheckInId) {
+        // If editCheckInId exists, run an HTTP PUT request to update the record! ✏️
+        const response = await fetch(`http://localhost:8080/check-in/update/${editCheckInId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(checkInData)
+        });
+
+          if (response.ok) {
+          const updatedCheckIn = await response.json();
+          // Map across current list array and swap out only the updated element
+          setCheckInList(checkInList.map(item => item.checkInId === editCheckInId ? updatedCheckIn : item));
+          setEditCheckInId(null);
+          setIsSubmitted(true);
+          setFeeling(""); 
+          setCategoryKey("");
+          setErrors({});
+        }
+      }
+      
+      else {
         const response = await fetch (`http://localhost:8080/check-in/user/${userId}`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -51,16 +97,20 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
             setCategoryKey("");
             setErrors({});
           }
-          else {
-            console.error("Dang! Server error - could not save your check-in.");
-            setErrors({submit: "Dang! Server error - could not save your check-in."})
+        }
+        
+
+          //  {
+          //   console.error("Dang! Server error - could not save your check-in.");
+          //   setErrors({submit: "Dang! Server error - could not save your check-in."})
       
-            }
+          //   }
           } catch (error) {
             console.error('Oh dear. There was an error saving your check-in', error)
           }
-    }
-  };
+        }
+    };
+  
 
   return (
     <>
@@ -99,14 +149,39 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
       </div>
           
       <SpecificSlbButton categoryKey = {categoryKey}/>
-      <button type = "submit" className = "button1">Log Check-In</button>
+      <button type="submit" className="button1">
+            {editCheckInId ? "Update Check-In" : "Log Check-In"}
+          </button>
       </form>
+      <div className = "content-card">
+        <h3>Your Past Check Ins</h3>
+        {checkInList.length === 0 ? ( 
+            <p>No logged entries found yet.</p>
+          ) : (
+            <ul>
+              {checkInList.map((item) => (
+                <li key={item.checkInId} className="content-card" >
+                  <div>
+                    <strong>Feeling:</strong> {item.feeling} | <strong>Category:</strong> {item.categoryKey}
+                  </div>
+                  <div>
+                    <button type="button" className="button2" onClick={() => startEdit(item)} >Edit Check-In</button> 
+                    <button type="button" className="button2" onClick={() => deleteCheckIn(item.checkInId)}>Delete Check-In</button>
+                  </div>
+                  </li>
+              ))}
+                  </ul>
+          )}
+      </div>
+
+      
       </div>
   
 </>
   
   );
 }
+
 
 
 export default CheckInPage;
