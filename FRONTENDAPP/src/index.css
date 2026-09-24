@@ -194,11 +194,11 @@ a {
 
 .CYOform {
   background: #fdfdfd;
-  padding: 1.3rem;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  margin-top: 15px;
+  padding: .3rem;
+  border-radius: 3px;
+  border: .3px solid #e0e0e0;
+  box-shadow: rgba(0,0,0,0.05);
+  margin: 1rem 1rem 1rem 1rem;
   color:#11B27C;
 }
 
@@ -210,7 +210,7 @@ a {
   max-height: fit-content;
   background-color: #ECF6E8;
   font-family: 'Inter', system-ui, sans-serif;
-  padding: 30px;
+  padding: 10px;
 }
 
 .contact-card {
@@ -298,24 +298,25 @@ a {
 a:hover { text-decoration: underline; opacity: 0.8; }
 
 .bomb-button {
-  width: 10rem;
+  width: 8rem;
   height: 6rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px; 
+  padding: 10px 20px 10px 20px; 
   background-image: url('./assets/SelfLoveBombImage.png'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: rgba(22, 46, 35, 0.8);
+  background-color: rgba(157, 209, 186, 0.8);
   border-radius: 3rem;
-  border: .1rem solid var(--gold); /* Removed commas; standard syntax is space-separated */
+  border: .11rem dashed var(--gold); /* Removed commas; standard syntax is space-separated */
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s ease;
   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+  margin: 2rem;
 }
 
 .bomb-button:hover {
@@ -327,10 +328,10 @@ a:hover { text-decoration: underline; opacity: 0.8; }
   padding: 12px 24px;
   cursor: pointer;
   border: .1rem solid #162e23;
-  border-radius: 50px; 
+  border-radius: 40px; 
   transition: all 0.3s ease;
   justify-content: center;
-  margin: 4px;
+  margin: 42x;
   font-size: 1rem;
 }
 
@@ -340,7 +341,7 @@ a:hover { text-decoration: underline; opacity: 0.8; }
 
 
 .button1:hover, .button2:hover .button3:hover {
-  transform: translateY(-2px); /* pop effect */
+  transform: translateY(-4px); /* pop effect */
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
@@ -371,7 +372,7 @@ a:hover { text-decoration: underline; opacity: 0.8; }
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 20px;
+  margin: 1px;
   border: 1px solid var(--red);
   border-radius: 11px;
   max-width: fit-content;
@@ -382,7 +383,7 @@ a:hover { text-decoration: underline; opacity: 0.8; }
 
 .submit-btn {
   width: 100%;
-  padding: 14px;
+  padding: 2px;
   background-color: #11B27C;
   color: white;
   border: solid;

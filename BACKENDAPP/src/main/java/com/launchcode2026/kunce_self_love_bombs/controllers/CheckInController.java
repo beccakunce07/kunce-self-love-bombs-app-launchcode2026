@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/check-in")
@@ -30,21 +29,6 @@ public class CheckInController {
     public String test() {
         return "I am here";
     }
-
-//    @PostMapping("/create-check-in")
-//    public ResponseEntity<?> createCheckIn(@RequestBody CheckIn checkIn) {
-//        // 2. Fetch the user using the userId sent from the React frontend
-//        Optional<User> userOptional = userRepository.findById(checkIn.getUserId());
-//
-//        if (userOptional.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                    .body("Error: User with ID " + checkIn.getUserId() + " not found.");
-//        }
-//        checkIn.setUser(userOptional.get());
-//
-//        CheckIn savedCheckIn = checkInRepository.save(checkIn);
-//        return ResponseEntity.ok(savedCheckIn);
-//    }
 
     @PostMapping("/user/{userId}")
     public ResponseEntity<?> createCheckInWithUserId(@PathVariable("userId") int userId, @RequestBody CheckIn checkIn) {
@@ -67,6 +51,36 @@ public class CheckInController {
     public List<CheckIn> getAll(){
         return checkInRepository.findAll();
 
+    }
+
+    @DeleteMapping("/delete/{checkInId}")
+    public ResponseEntity<?> deleteCheckIn(@PathVariable("checkInId") int checkInId) {
+        if (!checkInRepository.existsById(checkInId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Check-in not found.");
+        }
+        checkInRepository.deleteById(checkInId);
+        return ResponseEntity.ok("Check-in deleted successfully.");
+    }
+
+
+    @PutMapping("/update/{checkInId}")
+    public ResponseEntity<?> updateCheckIn(@PathVariable("checkInId") int checkInId, @RequestBody CheckIn updatedCheckIn) {
+        java.util.Optional<CheckIn> checkInOptional = checkInRepository.findById(checkInId);
+
+        if (checkInOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Check-in not found.");
+        }
+
+        CheckIn existingCheckIn = checkInOptional.get();
+
+        //need to apply the updates so forcing it to update this
+        existingCheckIn.setFeeling(updatedCheckIn.getFeeling());
+        existingCheckIn.setCategoryKey(updatedCheckIn.getCategoryKey());
+
+        // save updated check in into repo
+        CheckIn savedCheckIn = checkInRepository.save(existingCheckIn);
+
+        return ResponseEntity.ok(savedCheckIn);
     }
 
 }

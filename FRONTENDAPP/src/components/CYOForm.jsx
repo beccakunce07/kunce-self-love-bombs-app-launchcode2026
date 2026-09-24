@@ -93,9 +93,9 @@ const startEdit = (item) => {
   };
 
   return (
-    <div> {/* button to show or close form. using logic */}
-      <button type = "button" className='button1' onClick={() => setShowForm(!showForm)}>
-        {showForm ? "Close Form" : "⟢Let's Create⟢"}
+    <div> 
+      <button type = "button1" className='button1' onClick={() => setShowForm(!showForm)}>
+        {showForm ? "⟢Close Form⟢" : "⟢Let's Create⟢"}
       </button>
  
       {showForm && ( 
@@ -122,12 +122,15 @@ const startEdit = (item) => {
           onChange={handleChange}>
           
             <option value = "">⟢Choose Category⟢</option>
-            <option value="Finances">finances</option>
             <option value="Body">body</option>
+            <option value="Career"></option>
             <option value="Relationship">relationship</option>
             <option value="Purpose">purpose</option>
-            <option value="Life In General">life in general</option>
+            <option value="Finances">finances</option>
+            <option value="World">finances</option>
+            <option value="Life in General">life in general</option>
             <option value="Something Else">something else</option>
+            
           </select>
           <p>{errors.categoryKey}</p>
           </div>
@@ -148,7 +151,7 @@ const startEdit = (item) => {
             <p>{item.text}</p>
             <p><em>[{item.categoryKey}]</em>: {item.message}</p>
             <button className="button1" onClick={() => startEdit(item)}>Edit</button>
-            <button className="button3" onClick={() => deleteItem(item.id)}>Delete</button>
+            <button className="button1" onClick={() => deleteItem(item.id)}>Delete</button>
           </li>
           );
         }

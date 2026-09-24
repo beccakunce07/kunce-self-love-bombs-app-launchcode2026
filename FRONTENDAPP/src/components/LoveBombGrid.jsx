@@ -1,6 +1,5 @@
-import {useState} from "react";
+import { useState } from "react";
 import SlbBank from "./SlbBank.jsx";
-
 
 const categoryColors = {
     "finances": {bg: "#EEEDFE", text: "#3C3489", border: "#AFA9EC"},
@@ -9,7 +8,8 @@ const categoryColors = {
     "purpose": {bg: "#FAEEDA", text: "#633806", border: "#EF9F27"},
     "life in general": {bg: "#EAF3DE", text: "#27500A", border: "#97C459"},
     "something else": {bg: "#FAECE7", text: "#712B13", border: "#F0997B"},
-}
+    "world": { bg: '#E6F4F1', text: '#154D4F', border: '#8BC3C1' },
+    "career": { bg: '#E9EFF5', text: '#243E56', border: '#92ADC6' },};
 
 function PlayIcon() {
     return (
@@ -26,10 +26,13 @@ function StopIcon() {
         </svg>
     );
 }
-//function LoveBombCar takes inthe bomb message, what voice they chose, the start and the stop button as parameters
+
 function LoveBombCard({bomb, speakingId, onSpeak, onStop}) {
-    const colors = categoryColors[bomb.key] || categoryColors["finances"];
-    const isSpeaking = speakingId === bomb.id;
+     const cleanKey = bomb?.key?.toLowerCase()?.trim() || '';
+  const colors = categoryColors[cleanKey] || categoryColors.finances;
+  const isSpeaking = speakingId === bomb.id;
+
+  const displayMessage = bomb.text || bomb.message || bomb.quote || bomb
 
     return (
         <div style={{
@@ -42,18 +45,18 @@ function LoveBombCard({bomb, speakingId, onSpeak, onStop}) {
             gap: 10,
             transition: "border-color 0.2s",
         }}>
-      <span style={{
-          fontSize: 11,
-          fontWeight: 500,
-          color: colors.text,
-          background: colors.bg,
-          padding: "2px 10px",
-          borderRadius: 20,
-          alignSelf: "flex-start",
-          letterSpacing: "0.02em",
-      }}>
-        {bomb.key}
-      </span>
+            <span style={{
+                fontSize: 11,
+                fontWeight: 500,
+                color: colors.text,
+                background: colors.bg,
+                padding: "2px 10px",
+                borderRadius: 20,
+                alignSelf: "flex-start",
+                letterSpacing: "0.02em",
+            }}>
+                {bomb.key}
+            </span>
 
             <p style={{
                 fontSize: 14,
@@ -66,20 +69,21 @@ function LoveBombCard({bomb, speakingId, onSpeak, onStop}) {
             </p>
 
             <button
-                onClick={() => isSpeaking ? onStop() : onSpeak(bomb)}
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    padding: "6px 12px",
-                    border: `0.5px solid ${colors.border}`,
-                    borderRadius: 8,
-                    background: isSpeaking ? colors.bg : "transparent",
-                    color: colors.text,
-                    fontSize: 12,
-                    cursor: "pointer",
-                    alignSelf: "flex-start",
-                    transition: "background 0.15s",
+            type="button"
+            onClick={() => (isSpeaking ? onStop() : onSpeak(bomb), displayMessage)}
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "6px 12px",
+                border: `0.5px solid ${colors.border}`,
+                borderRadius: 8,
+                background: isSpeaking ? colors.bg : "transparent",
+                color: colors.text,
+                fontSize: 12,
+                cursor: "pointer",
+                alignSelf: "flex-start",
+                transition: "background 0.15s",
                 }}
             >
                 {isSpeaking ? <StopIcon/> : <PlayIcon/>}
@@ -89,35 +93,30 @@ function LoveBombCard({bomb, speakingId, onSpeak, onStop}) {
     );
 }
 
-export default function LoveBombGrid({onSpeak}) {
+// Accept the custom voice playback function from DisplayBank.jsx
+export default function LoveBombGrid({ selectedVoiceName }) {
     const [speakingId, setSpeakingId] = useState(null);
 
-const handleSpeak = (bomb) => {
-  if (!("speechSynthesis" in window)) return;
+    const handleSpeak = (bomb) => {
+        if (!("speechSynthesis" in window)) return;
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(bomb.message);
 
-  // 1. Cancel any current speech
-  window.speechSynthesis.cancel();
+        const currentSystemVoices = window.speechSynthesis.getVoices();
+        const activeVoice = currentSystemVoices.find((v) => v.name === selectedVoiceName);
+        
+        if (activeVoice) {
+            utterance.voice = activeVoice; // Assign the direct browser reference
+        }
 
-  // 2. Create the utterance object
-  const utterance = new SpeechSynthesisUtterance(bomb.message);
+        utterance.onend = () => setSpeakingId(null);
+        utterance.onerror = () => setSpeakingId(null);
 
-  // 3. Set the state when speech ends
-  utterance.onend = () => {
-    setSpeakingId(null);
-  };
-
-  // 4. Handle errors (like user manually stopping)
-  utterance.onerror = () => {
-    setSpeakingId(null);
-  };
-
-  // 5. START THE SPEECH
-  setSpeakingId(bomb.id);
-  window.speechSynthesis.speak(utterance);
-
-  // Optional: Keep your original onSpeak prop if the parent needs to know
-  if (onSpeak) onSpeak(bomb.message);
-};
+        setSpeakingId(bomb.id);
+        
+        window.speechSynthesis.speak(utterance);
+    };
 
     const handleStop = () => {
         window.speechSynthesis.cancel();
@@ -143,5 +142,3 @@ const handleSpeak = (bomb) => {
         </div>
     );
 }
-
-

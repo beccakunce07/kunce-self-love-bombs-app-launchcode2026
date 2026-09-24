@@ -1,6 +1,7 @@
 import CYOForm from "../components/CYOForm";
 import PageHeader from "../components/PageHeader";
 import LoveBombGrid from "../components/LoveBombGrid";
+import DisplayBank from "../components/DisplayBank";
 
 function  CreateYourOwnPage ({user}) {
     return (
@@ -12,7 +13,9 @@ function  CreateYourOwnPage ({user}) {
             Here at Self Love Bombs we believe you are the author of your own narrative. You get to decide how you talk to you. Here is an opportunity to practice speaking kindly to yourself. No pressure - whatever feels true.
             </p>
             <CYOForm user = {user} />
-            <LoveBombGrid />
+            </div>
+            <div>
+            <DisplayBank />
             </div>
         </div>
         </>

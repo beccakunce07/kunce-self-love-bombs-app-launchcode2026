@@ -154,7 +154,7 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
           </button>
       </form>
       <div className = "content-card">
-        <h3>Your Past Check Ins</h3>
+        <h2>Your Past Check-Ins</h2>
         {checkInList.length === 0 ? ( 
             <p>No logged entries found yet.</p>
           ) : (
@@ -165,8 +165,8 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
                     <strong>Feeling:</strong> {item.feeling} | <strong>Category:</strong> {item.categoryKey}
                   </div>
                   <div>
-                    <button type="button" className="button2" onClick={() => startEdit(item)} >Edit Check-In</button> 
-                    <button type="button" className="button2" onClick={() => deleteCheckIn(item.checkInId)}>Delete Check-In</button>
+                    <button type="button" className="button" onClick={() => startEdit(item)} >Edit Check-In</button> 
+                    <button type="button" className="button" onClick={() => deleteCheckIn(item.checkInId)}>Delete Check-In</button>
                   </div>
                   </li>
               ))}

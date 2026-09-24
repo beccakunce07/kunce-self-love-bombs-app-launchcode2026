@@ -6,6 +6,7 @@ function PageFooter() {
     return (
         <footer>
                     <div><Link to="https://www.linkedin.com/in/becca-kunce-a0013255/">⟢ Hire Me ⟢ </Link></div>
+                    <div><Link to="https://www.instagram.com/naturesartforms">⟢ Follow Me ⟢ </Link></div>
                     <a href="mailto:rebeccakunce@gmail.com">⟢ Email Me ⟢ </a>
                     <div>
                     <p>

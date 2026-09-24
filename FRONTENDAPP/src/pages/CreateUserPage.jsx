@@ -1,6 +1,6 @@
 import CreateUserForm from "../components/CreateUserForm";
 import PageHeader from "../components/PageHeader";
-import LoveBombGrid from "../components/LoveBombGrid";
+import DisplayBank from "../components/DisplayBank";
 
 function  CreateUserPage ({setCurrentUser}) {
     return (
@@ -12,7 +12,7 @@ function  CreateUserPage ({setCurrentUser}) {
             We want you to be able to access your information! Create a basic user profile to keep love bombing yourself! Please note: this is not a secure username. Authentication is not required.
             </p>
             <CreateUserForm setCurrentUser = {setCurrentUser}/>
-            <LoveBombGrid />
+            <DisplayBank />
             </div>
         </div>
         </>
