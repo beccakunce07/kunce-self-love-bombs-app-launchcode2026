@@ -1,0 +1,103 @@
+package com.launchcode2026.kunce_self_love_bombs.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+public class CheckIn {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int checkInId;
+
+    private String categoryKey;
+    private String feeling;
+    private Instant recordedAt;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    @JsonIgnore
+    private User user;
+
+    @ManyToMany (fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "checkIn_loveBomb",
+            joinColumns = @JoinColumn(name = "checkInId"),
+            inverseJoinColumns = @JoinColumn(name = "loveBombId")
+    )
+    @JsonIgnoreProperties //doing this so it doesnt get caught in an infinite loop sice check ins live in both user and love bomb
+    private List<LoveBomb> loveBombs = new ArrayList<>();
+
+    public CheckIn(){}
+
+    public CheckIn(User user, String categoryKey, String feeling, Instant recordedAt){
+        this.user = user;
+        this.categoryKey = categoryKey;
+        this.feeling = feeling;
+        this.recordedAt = recordedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getUserId() {
+        return this.user != null ? this.user.getUserId() : 0;
+    }
+
+    public void setUserId(int userId) {
+        if (this.user == null) {
+            this.user = new User();
+        }
+        this.user.setUserId(userId);
+    }
+    public int getCheckInId() {
+        return checkInId;
+    }
+
+    public void setCheckInId(int checkInId) {
+        this.checkInId = checkInId;
+    }
+
+    public String getCategoryKey() {
+        return categoryKey;
+    }
+
+    public void setCategoryKey(String categoryKey) {
+        this.categoryKey = categoryKey;
+    }
+
+    public List<LoveBomb> getLoveBombs() {
+        return loveBombs;
+    }
+
+    public void setLoveBombs(List<LoveBomb> loveBombs) {
+        this.loveBombs = loveBombs;
+    }
+
+    public String getFeeling() {
+        return feeling;
+    }
+
+    public void setFeeling(String feeling) {
+        this.feeling = feeling;
+    }
+
+    public Instant getRecordedAt() {
+        return recordedAt;
+    }
+
+    public void setRecordedAt(Instant recordedAt) {
+        this.recordedAt = recordedAt;
+    }
+
+}
