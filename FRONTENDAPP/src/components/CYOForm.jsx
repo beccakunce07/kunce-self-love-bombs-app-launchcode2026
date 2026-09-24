@@ -122,14 +122,14 @@ const startEdit = (item) => {
           onChange={handleChange}>
           
             <option value = "">⟢Choose Category⟢</option>
-            <option value="Body">body</option>
-            <option value="Career"></option>
-            <option value="Relationship">relationship</option>
-            <option value="Purpose">purpose</option>
-            <option value="Finances">finances</option>
-            <option value="World">finances</option>
-            <option value="Life in General">life in general</option>
-            <option value="Something Else">something else</option>
+            <option value="body">body</option>
+            <option value="career">career</option>
+            <option value="relationship">relationship</option>
+            <option value="purpose">purpose</option>
+            <option value="finances">finances</option>
+            <option value="world">world</option>
+            <option value="life in general">life in general</option>
+            <option value="something else">something else</option>
             
           </select>
           <p>{errors.categoryKey}</p>

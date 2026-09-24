@@ -60,7 +60,7 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
 
      try {
       if (editCheckInId) {
-        // If editCheckInId exists, run an HTTP PUT request to update the record! ✏️
+        // if editCheckInId exists (user has clicked edit) run an HTTP PUT request to update the check in
         const response = await fetch(`http://localhost:8080/check-in/update/${editCheckInId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -144,17 +144,21 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
       <button type = "button" className = "button2" onClick={() => setCategoryKey("body")}>Body</button>
       <button type = "button" className = "button2" onClick={() => setCategoryKey("relationship")}>Relationship</button>
       <button type = "button" className = "button2" onClick={() => setCategoryKey("purpose")}>Purpose</button>
+      <button type = "button" className = "button2" onClick={() => setCategoryKey("career")}>Career</button>
+      <button type = "button" className = "button2" onClick={() => setCategoryKey("world")}>Worlde</button>
       <button type = "button" className = "button2" onClick={() => setCategoryKey("life in general")}>Life in general</button>
       <button type = "button" className = "button2" onClick={() => setCategoryKey("something else")}>Something Else</button>
       </div>
           
       <SpecificSlbButton categoryKey = {categoryKey}/>
-      <button type="submit" className="button1">
-            {editCheckInId ? "Update Check-In" : "Log Check-In"}
-          </button>
+       {editCheckInId && (
+            <button type="submit" className="button1">
+              Update Check-In
+            </button>
+       )}
       </form>
       <div className = "content-card">
-        <h2>Your Past Check-Ins</h2>
+        <h1>{user?.firstName}'s Check-Ins</h1>
         {checkInList.length === 0 ? ( 
             <p>No logged entries found yet.</p>
           ) : (
@@ -162,7 +166,7 @@ function CheckInPage ({user}) { //attempting to pass the user as a prop in Check
               {checkInList.map((item) => (
                 <li key={item.checkInId} className="content-card" >
                   <div>
-                    <strong>Feeling:</strong> {item.feeling} | <strong>Category:</strong> {item.categoryKey}
+                    <strong>Feeling</strong> {item.feeling} | <strong>Category:</strong> {item.categoryKey}
                   </div>
                   <div>
                     <button type="button" className="button" onClick={() => startEdit(item)} >Edit Check-In</button> 
