@@ -8,14 +8,6 @@ export function AuthProvider({ children }) {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  // Automatically load the user if they refresh the page
-//   useEffect(() => {
-//     const savedUser = localStorage.getItem('love_bomb_user');
-//     if (savedUser) {
-//       setCurrentUser(JSON.parse(savedUser));
-//     }
-//   }, []);
-
   const loginUser = (userData) => {
     setCurrentUser(userData);
     localStorage.setItem('love_bomb_user', JSON.stringify(userData)); // Keeps them logged in

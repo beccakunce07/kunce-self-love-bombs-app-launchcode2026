@@ -25,24 +25,19 @@ public class CheckInController {
     @Autowired
     private CheckInRepository checkInRepository;
 
-    @GetMapping("testing")
-    public String test() {
-        return "I am here";
-    }
-
+    //Adding a check in and attaching it to a user.
     @PostMapping("/user/{userId}")
     public ResponseEntity<?> createCheckInWithUserId(@PathVariable("userId") int userId, @RequestBody CheckIn checkIn) {
         User user = userRepository.findByUserId(userId);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("oops. No user found with id " + userId);
         }
-
         checkIn.setUser(user);
         CheckIn savedCheckIn = checkInRepository.save(checkIn);
         return ResponseEntity.ok(savedCheckIn);
     }
-    @GetMapping("/find-by-user-id-{userId}")
-    public ResponseEntity<List<CheckIn>> getCheckInsByUserId(@PathVariable int userId){
+    @GetMapping("/find-by-user-id/{userId}")
+    public ResponseEntity<List<CheckIn>> getCheckInsByUserId(@PathVariable ("userId") int userId){
         List<CheckIn> checkIns = checkInRepository.findByUser_UserId(userId);
         return ResponseEntity.ok(checkIns);
     }
@@ -85,4 +80,4 @@ public class CheckInController {
 
 }
 
-//}
+

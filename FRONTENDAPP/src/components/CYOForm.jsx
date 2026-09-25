@@ -199,24 +199,16 @@ function CYOForm({ user }) {
       
       <div className="bank-list-container">
         {messageList.length === 0 ? (
-          <p>Your bank is empty. Start adding some affirmations above!</p>
+          <h1>Your bank is empty. Start adding some affirmations above!</h1>
         ) : (
           <ul className="bank-list">
+            
             {messageList.map((item) => (
               <li key={item.loveBombId} className="content-card">
                 <div>
-                  <h3>{item.message} relating to {item.categoryKey}</h3>
-                  <p>
-                    This <em>Self Love Bomb </em> was logged on {' '}
-                    {item.timeSubmitted ? new Date(item.timeSubmitted).toLocaleDateString(undefined, {
-                      weekday: 'short', 
-                      month: 'short',
-                      day: 'numeric'
-                    }) : 'At'} at {item.timeSubmitted ? new Date(item.timeSubmitted).toLocaleTimeString(undefined, {
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    }) : ''}
-                  </p>
+                  <h1 style={{ textAlign: 'center', fontSize: '3rem', }}> {user.firstName}'s Love Bombs </h1> 
+                  <h2>Repeat after me:</h2> 
+                  <h1>{item.message}</h1>                
                 </div>
                 <div>
                   <button type="button" className="button3" onClick={() => startEdit(item)}>Edit Check-In</button> 
