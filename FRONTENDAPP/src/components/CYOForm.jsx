@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function CYOForm({user}) {
-
+function CYOForm({ user }) {
   const userId = user ? user.userId || user.id : null;
 
   const [messageList, setMessageList] = useState([]);
@@ -12,81 +11,133 @@ function CYOForm({user}) {
   const [formData, setFormData] = useState({
     message: "",
     categoryKey: ""
-  }
-  )
+  });
+
+  // Automatically fetch existing love bombs from the repo when component loads
+  useEffect(() => {
+    // Only attempt to fetch data if the userId prop has resolved and is loaded
+    if (!userId) return;
+
+    const fetchUserLoveBombs = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/love-bomb/find-all");
+        if (response.ok) {
+          const data = await response.json();
+          
+          const userSpecificBombs = data.filter(item => {
+            
+            const itemUserId = item.user ? (item.user.userId || item.user.id) : item.userId;
+            return Number(itemUserId) === Number(userId);
+          });
+          setMessageList(userSpecificBombs);
+        }
+      } catch (error) {
+        console.error("Error fetching baseline Love Bank entries:", error);
+      }
+    };
+    
+    fetchUserLoveBombs();
+  }, [userId]); 
 
   const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData({ ...formData, [name]: value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const validate = () => {
     let newErrors = {};
     if (!formData.message || !formData.message.trim()) newErrors.message = "Whoops. message is required.";
-    if (!formData.categoryKey) newErrors.categoryKey = "uh oh. please add a category this relates to."
+    if (!formData.categoryKey) newErrors.categoryKey = "uh oh. please add a category this relates to.";
     
-
     if (!userId) {
       console.error("Cannot submit form: userId is missing or undefined.");
       newErrors.submit = "You must be logged in to save a message.";
-
-        }
+    }
         
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-    };
+  };
 
-  const handleMessageSubmit = (m) => {
+  const handleMessageSubmit = async (m) => {
     m.preventDefault();
 
+    if (!validate()) return; 
 
-    if (!validate()) return; //if fails validation check just ends instead of going through everything else
+    if (editMessageId) {
+      try {
+        // Updates the backend LoveBombRepository
+        const response = await fetch(`http://localhost:8080/love-bomb/update/${editMessageId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: formData.message,
+            categoryKey: formData.categoryKey
+          })
+        });
 
-      if (editMessageId) {
-        setMessageList(messageList.map(item => item.messageId === editMessageId ? {...item, ...formData, timeSubmitted: new Date().toISOString } : item));
-        setEditMessageId(null);
-        setFormData({message: "", categoryKey: ""});
-        setShowForm(false);
+        if (response.ok) {
+          const updatedMessage = await response.json();
+          // clears out form
+          setMessageList(messageList.map(item => item.loveBombId === editMessageId ? updatedMessage : item));
+          setEditMessageId(null);
+          setFormData({ message: "", categoryKey: "" });
+          setShowForm(false);
+          setErrors({});
+        }
+      } catch (error) {
+        console.error('Oh no. Error updating love Bomb.', error);
+        setErrors({ submit: "Failed to update message. Please try again." });
+      }
     } else {
-      const addLoveBomb = async () => {
-        try {
-          const response = await fetch(`http://localhost:8080/love-bomb/user/${userId}`, {
+      try {
+        // saves new entry
+        const response = await fetch(`http://localhost:8080/love-bomb/user/${userId}`, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
             message: formData.message,
-            categoryKey: formData.categoryKey,
-            timeSubmitted: new Date().toISOString()
+            categoryKey: formData.categoryKey
           })
         });
 
         if (response.ok){
           const savedMessage = await response.json();
+          // edits new entry directly
           setMessageList([...messageList, savedMessage]);
           console.log("Love Bomb added successfully. Thank you.", savedMessage);
-          return <p>Your love bomb was added succesfully. Thank you</p>        
+          setFormData({ message: "", categoryKey: "" });
+          setShowForm(false);
+          setErrors({});
         }
-
-        setFormData({ message: "", categoryKey: "" });
-        setShowForm(false);
-        setErrors({});
-        } catch (error) {
-          console.error('Oh no. Error adding love Bomb.', error)
-          setErrors({ submit: "Failed to save message. Please try again." });
-          return <p>Failed to save message. Please try again.</p>
-        }
-  }
-    addLoveBomb();
-  }
-};
-  const deleteItem = (messageId) => {
-    setMessageList(messageList.filter(item => item.messageId !== messageId));
+      } catch (error) {
+        console.error('Oh no. Error adding love Bomb.', error);
+        setErrors({ submit: "Failed to save message. Please try again." });
+      }
+    }
   };
 
-const startEdit = (item) => {
-    setEditMessageId(item.messageId);
+  const deleteItem = async (loveBombId) => {
+    try {
+      // delete
+      const response = await fetch(`http://localhost:8080/love-bomb/delete/${loveBombId}`, {
+        method: 'DELETE'
+      });
+      if (response.ok) {
+        // filter
+        setMessageList(messageList.filter(item => item.loveBombId !== loveBombId));
+        console.log("Love bomb removed from database successfully.");
+      } else {
+        console.error("Failed to delete entry from backend database.");
+      }
+    } catch (error) {
+      console.error("Network error during deletion:", error);
+    }
+  };
+
+  const startEdit = (item) => {
+    setEditMessageId(item.loveBombId);
     setFormData({
-      message: item.message || item.text || "",
+      message: item.message || "",
       categoryKey: item.categoryKey || ""
     });
     setShowForm(true); 
@@ -94,74 +145,82 @@ const startEdit = (item) => {
 
   return (
     <div> 
-      <button type = "button1" className='button1' onClick={() => setShowForm(!showForm)}>
+      <button type="button" className='button1' onClick={() => {
+        setShowForm(!showForm);
+        if (showForm) { setEditMessageId(null); setFormData({message: "", categoryKey: ""}); }
+      }}>
         {showForm ? "⟢Close Form⟢" : "⟢Let's Create⟢"}
       </button>
  
       {showForm && ( 
         <form className="CYOform" onSubmit={handleMessageSubmit}>
-          <p>{errors.submit}</p>
-          <div className = "form-group">
+          {errors.submit && <p className="error">{errors.submit}</p>}
+          <div className="form-group">
             <label htmlFor="message">Speak Kindly to Yourself Here Please:</label>
-          <input 
+            <input 
               name="message"
               id="message"
               value={formData.message} 
               onChange={handleChange}
               placeholder="i.e. 'I am loved and adored always.'"
             />
-            <p>{errors.message}</p>
+            {errors.message && <p className="error">{errors.message}</p>}
           </div>
           
-          <div className = "form-group">
-          <label htmlFor="categoryKey">This relates to my:</label>
-          <select 
-          id="categoryKey"
-          name="categoryKey"
-          value = {formData.categoryKey}
-          onChange={handleChange}>
-          
-            <option value = "">⟢Choose Category⟢</option>
-            <option value="Body">body</option>
-            <option value="Career"></option>
-            <option value="Relationship">relationship</option>
-            <option value="Purpose">purpose</option>
-            <option value="Finances">finances</option>
-            <option value="World">finances</option>
-            <option value="Life in General">life in general</option>
-            <option value="Something Else">something else</option>
-            
-          </select>
-          <p>{errors.categoryKey}</p>
+          <div className="form-group">
+            <label htmlFor="categoryKey">This relates to my:</label>
+            <select 
+              id="categoryKey"
+              name="categoryKey"
+              value={formData.categoryKey}
+              onChange={handleChange}
+            >
+              <option value="">⟢Choose Category⟢</option>
+              <option value="body">body</option>
+              <option value="career">career</option>
+              <option value="relationship">relationship</option>
+              <option value="purpose">purpose</option>
+              <option value="finances">finances</option>
+              <option value="world">world</option>
+              <option value="life in general">life in general</option>
+              <option value="something else">something else</option>
+            </select>
+            {errors.categoryKey && <p className="error">{errors.categoryKey}</p>}
           </div>
-          <input type="hidden" id="timeSubmitted" name="timeSubmitted"></input>
 
-          <button className="button2" type="submit">
-            {editMessageId ? "Update Bank" : "Add to Bank"}
-          </button>
+      
+          {editMessageId ? (
+            <button className="button2" type="submit">Update Bank</button>
+          ) : (
+            <button className="button2" type="submit">Add to Bank</button>
+          )}
         </form>
-        
       )}
       
-      <ul>
-        {messageList.map((item, index) => {
-          const itemKey = item.messageId || item.id ||index;
-          return (
-          <li key={itemKey}>
-            <p>{item.text}</p>
-            <p><em>[{item.categoryKey}]</em>: {item.message}</p>
-            <button className="button1" onClick={() => startEdit(item)}>Edit</button>
-            <button className="button1" onClick={() => deleteItem(item.id)}>Delete</button>
-          </li>
-          );
-        }
-      )}
-      </ul>
-      
+      <div className="bank-list-container">
+        {messageList.length === 0 ? (
+          <h1>Your bank is empty. Start adding some affirmations above!</h1>
+        ) : (
+          <ul className="bank-list">
+            
+            {messageList.map((item) => (
+              <li key={item.loveBombId} className="content-card">
+                <div>
+                  <h1 style={{ textAlign: 'center', fontSize: '3rem', }}> {user.firstName}'s Love Bombs </h1> 
+                  <h2>Repeat after me:</h2> 
+                  <h1>{item.message}</h1>                
+                </div>
+                <div>
+                  <button type="button" className="button3" onClick={() => startEdit(item)}>Edit Check-In</button> 
+                  <button type="button" className="button3" onClick={() => deleteItem(item.loveBombId)}>Delete Check-In</button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div> 
-
-    
   ); 
-};
+}
 
 export default CYOForm;

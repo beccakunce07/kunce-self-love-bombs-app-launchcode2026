@@ -29,10 +29,10 @@ function SpecificSlbButton ({categoryKey}) {
     <>
       <button className = "bomb-button" onClick={handleClick}>
       </button>
-      <h4>{message}</h4>
+      <h1>{message}</h1>
         {message && (
-        <button className= "button2" onClick={handlePlay}>
-          ▶        </button>
+        <button className= "button1" onClick={handlePlay}>
+          ▶ Play Love Bomb        </button> //clicking the play button
       )}
 
     </>

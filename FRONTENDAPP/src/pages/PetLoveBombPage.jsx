@@ -20,7 +20,6 @@ function PetLoveBombPage () {
         </div>
         </div>
         </div>
-
     )
 }
 
