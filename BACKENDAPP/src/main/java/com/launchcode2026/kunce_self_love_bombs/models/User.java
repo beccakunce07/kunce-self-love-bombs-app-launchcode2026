@@ -23,10 +23,10 @@ public class User {
     private String lastName;
     private String username;
     private String email;
+    private LocalDate birthday;
 
     @JsonProperty("birthday")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") // 👈 Add this helper!
-    private LocalDate birthday;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")

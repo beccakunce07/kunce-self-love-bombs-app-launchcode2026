@@ -22,7 +22,7 @@ public class LoveBomb {
 
     private Instant timeSubmitted;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     @JsonIgnore //Hopefully this stops the loop going from check in to lovebomb and vice versa
     private User user;
@@ -31,7 +31,8 @@ public class LoveBomb {
 //    @JsonIgnore
 //    private List<CheckIn> checkIns = new ArrayList<>();
 
-    public LoveBomb(){}
+    public LoveBomb() {
+    }
 
     public int getUserId() {
         return this.user != null ? this.user.getUserId() : 0;
@@ -49,7 +50,7 @@ public class LoveBomb {
         return user;
     }
 
-    public void setUser(User user){
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -84,12 +85,5 @@ public class LoveBomb {
     public void setTimeSubmitted(Instant timeSubmitted) {
         this.timeSubmitted = timeSubmitted;
     }
-
-//    public List<CheckIn> getCheckIns() {
-//        return checkIns;
-//    }
-//
-//    public void setCheckIns(List<CheckIn> checkIns) {
-//        this.checkIns = checkIns;
-//    }
 }
+

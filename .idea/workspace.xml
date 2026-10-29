@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a5cb6e0-b74a-48e7-a2c3-36128d180c02" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/CheckInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/CheckInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKENDAPP/src/main/java/com/launchcode2026/kunce_self_love_bombs/controllers/LoveBombController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/components/CYOForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/components/CYOForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/components/CreateUserForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/components/CreateUserForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/context/AuthContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/context/AuthContext.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTENDAPP/src/pages/PetLoveBombPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTENDAPP/src/pages/PetLoveBombPage.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="7a5cb6e0-b74a-48e7-a2c3-36128d180c02" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +72,6 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "beccatrying",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/beccakunce/Desktop/LaunchCode/Coursework/Unit-2/unit-2-self-love-bombs-appBK/kunce-self-love-bombs-app-launchcode2026",
